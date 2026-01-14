@@ -63,6 +63,36 @@ namespace Manutenção_Windows.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap sfcIcon {
+            get {
+                object obj = ResourceManager.GetObject("sfcIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sfcIcon1 {
+            get {
+                object obj = ResourceManager.GetObject("sfcIcon1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sfcIcon2 {
+            get {
+                object obj = ResourceManager.GetObject("sfcIcon2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap tumblr_6f41690f782d77e9b463d52b66a8ec54_0f726df2_540 {
             get {
                 object obj = ResourceManager.GetObject("tumblr_6f41690f782d77e9b463d52b66a8ec54_0f726df2_540", resourceCulture);
@@ -77,6 +107,33 @@ namespace Manutenção_Windows.Properties {
             get {
                 object obj = ResourceManager.GetObject("tumblr_6f41690f782d77e9b463d52b66a8ec54_0f726df2_5401", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.IO.UnmanagedMemoryStream semelhante a System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Win95_Boot {
+            get {
+                return ResourceManager.GetStream("Win95_Boot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.IO.UnmanagedMemoryStream semelhante a System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Win95_Erro {
+            get {
+                return ResourceManager.GetStream("Win95_Erro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.IO.UnmanagedMemoryStream semelhante a System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Win95_Ok {
+            get {
+                return ResourceManager.GetStream("Win95_Ok", resourceCulture);
             }
         }
     }

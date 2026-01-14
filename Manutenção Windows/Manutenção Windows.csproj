@@ -92,8 +92,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\SfcResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\SfcService.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -140,6 +142,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\tumblr_6f41690f782d77e9b463d52b66a8ec54_0f726df2_5401.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sfcIcon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Win95_Boot.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Win95_Ok.WAV" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Win95_Erro.WAV" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -117,4 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label1.Text" xml:space="preserve">
+    <value>O Deployment Image Servicing and Management verifica e repara a imagem do sistema do Windows usada como base para restaurar arquivos do sistema.
+Ele detecta corrupção na estrutura interna do Windows e pode baixar componentes corretos do Windows Update para substituir arquivos danificados.</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>O System File Checker verifica a integridade dos arquivos essenciais do Windows e repara automaticamente aqueles que estiverem corrompidos, ausentes ou modificados.
+Ele compara os arquivos do sistema com versões originais armazenadas pelo Windows e, se encontrar problemas, tenta restaurá-los para garantir o funcionamento correto do sistema operacional.</value>
+  </data>
 </root>
