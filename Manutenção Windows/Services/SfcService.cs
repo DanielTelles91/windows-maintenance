@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -24,6 +21,7 @@ namespace Manutenção_Windows.Services
                 FileName = "cmd.exe",
                 Arguments = "/c sfc /scannow",
                 UseShellExecute = true
+            //    WindowStyle = ProcessWindowStyle.Minimized
             };
 
             Process.Start(psi);

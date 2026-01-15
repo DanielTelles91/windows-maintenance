@@ -63,9 +63,9 @@ namespace Manutenção_Windows.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap sfcIcon {
+        internal static System.Drawing.Bitmap _1 {
             get {
-                object obj = ResourceManager.GetObject("sfcIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("_1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,39 +73,9 @@ namespace Manutenção_Windows.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap sfcIcon1 {
+        internal static System.Drawing.Bitmap search_laptop_1 {
             get {
-                object obj = ResourceManager.GetObject("sfcIcon1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap sfcIcon2 {
-            get {
-                object obj = ResourceManager.GetObject("sfcIcon2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap tumblr_6f41690f782d77e9b463d52b66a8ec54_0f726df2_540 {
-            get {
-                object obj = ResourceManager.GetObject("tumblr_6f41690f782d77e9b463d52b66a8ec54_0f726df2_540", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap tumblr_6f41690f782d77e9b463d52b66a8ec54_0f726df2_5401 {
-            get {
-                object obj = ResourceManager.GetObject("tumblr_6f41690f782d77e9b463d52b66a8ec54_0f726df2_5401", resourceCulture);
+                object obj = ResourceManager.GetObject("search_laptop_1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

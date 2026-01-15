@@ -118,11 +118,38 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label1.Text" xml:space="preserve">
-    <value>O Deployment Image Servicing and Management verifica e repara a imagem do sistema do Windows usada como base para restaurar arquivos do sistema.
-Ele detecta corrupção na estrutura interna do Windows e pode baixar componentes corretos do Windows Update para substituir arquivos danificados.</value>
+    <value>Deployment Image Servicing and Management verifica e repara a imagem do sistema do Windows usada como base para restaurar arquivos do sistema.
+Ele detecta corrupção na estrutura interna do Windows e pode baixar componentes corretos do Windows Update para substituir arquivos danificados.
+</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>O System File Checker verifica a integridade dos arquivos essenciais do Windows e repara automaticamente aqueles que estiverem corrompidos, ausentes ou modificados.
-Ele compara os arquivos do sistema com versões originais armazenadas pelo Windows e, se encontrar problemas, tenta restaurá-los para garantir o funcionamento correto do sistema operacional.</value>
+Ele compara os arquivos do sistema com versões originais armazenadas pelo Windows e, se encontrar problemas, tenta restaurá-los para garantir o funcionamento correto do sistema operacional.
+</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="picAnimacaoSFC.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAB3RJTUUH4gYaADMONG8aRQAAAVJJREFU
+        WEftlFGOwyAMRDl6jpabtXJh6DCYAG7a/dmREBUlfg8TJSUnx3E8eKSUXvN5nva726tr4VTgI4dnk4AI
+        7zcpEo3HCijUnakbmDHCIstwzCRRruU1wiKjto9meSfyWlnfFtmFW0rROleBiMh2+1VA4bsiux3g1qtA
+        fSd2RHY7MBKwNeRKhCWK2FwCUThDWADBXuzBmiuAAgrnWQVcuP2X8lP6glpcgRWJDs4S5Y41S6eX1EKd
+        BL1IVqCTEJGt0zupxTC4Q+8i748Sw+pzQbgbnJqvKQsMJD44fRMGNydflAjDAUZQxEaFDiSQkIB/YpSi
+        j8xEAleldZRX44EZ7omsSEwFFKywmciVhI1LuIXbZYmI+BIZDpGhAP4EICrSSJDAtAOUm0Ta1vM+BY4S
+        FuETO/BlAWRZ5G6w5lLkm2BNJ/IrsKYR+SVY82fg/9yaJ3qiy0yBUkMfAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="picAnimacaoDISM.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAB3RJTUUH4gYaADMONG8aRQAAAVJJREFU
+        WEftlFGOwyAMRDl6jpabtXJh6DCYAG7a/dmREBUlfg8TJSUnx3E8eKSUXvN5nva726tr4VTgI4dnk4AI
+        7zcpEo3HCijUnakbmDHCIstwzCRRruU1wiKjto9meSfyWlnfFtmFW0rROleBiMh2+1VA4bsiux3g1qtA
+        fSd2RHY7MBKwNeRKhCWK2FwCUThDWADBXuzBmiuAAgrnWQVcuP2X8lP6glpcgRWJDs4S5Y41S6eX1EKd
+        BL1IVqCTEJGt0zupxTC4Q+8i748Sw+pzQbgbnJqvKQsMJD44fRMGNydflAjDAUZQxEaFDiSQkIB/YpSi
+        j8xEAleldZRX44EZ7omsSEwFFKywmciVhI1LuIXbZYmI+BIZDpGhAP4EICrSSJDAtAOUm0Ta1vM+BY4S
+        FuETO/BlAWRZ5G6w5lLkm2BNJ/IrsKYR+SVY82fg/9yaJ3qiy0yBUkMfAAAAAElFTkSuQmCC
+</value>
   </data>
 </root>
