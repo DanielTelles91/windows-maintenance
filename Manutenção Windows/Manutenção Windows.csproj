@@ -92,6 +92,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DiskInfoModel.cs" />
     <Compile Include="Models\DismRepairResult.cs" />
     <Compile Include="Models\DismResult.cs" />
     <Compile Include="Models\SfcResult.cs" />
@@ -102,7 +103,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\CheckDiskService.cs" />
     <Compile Include="Services\DISMService.cs" />
+    <Compile Include="Services\PowerShellService.cs" />
     <Compile Include="Services\SfcService.cs" />
     <Compile Include="Utils\ImageSequenceAnimator.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -183,6 +186,21 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\anim_DISM\search_laptop_4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\anim_Relatorio\Relatorio-3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\anim_Relatorio\Relatorio-4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\anim_Relatorio\Relatorio-5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\anim_Relatorio\Relatorio-6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\anim_Relatorio\Relatorio-7.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\search_laptop_1.png" />

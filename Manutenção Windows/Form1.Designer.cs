@@ -34,28 +34,34 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnAgendar = new System.Windows.Forms.Button();
+            this.comboDiscos = new System.Windows.Forms.ComboBox();
+            this.btnVerificarDisco = new System.Windows.Forms.Button();
             this.txtCKDOutput = new System.Windows.Forms.TextBox();
             this.btnPegaRelatorio = new System.Windows.Forms.Button();
+            this.picAnimacaoDisk = new System.Windows.Forms.PictureBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.txtSfcOutput = new System.Windows.Forms.TextBox();
             this.btnSfc = new System.Windows.Forms.Button();
+            this.picAnimacaoSFC = new System.Windows.Forms.PictureBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.picAnimacaoDISM = new System.Windows.Forms.PictureBox();
             this.btnDismReparar = new System.Windows.Forms.Button();
             this.txtDismOutput = new System.Windows.Forms.TextBox();
             this.btnDismVerificar = new System.Windows.Forms.Button();
-            this.picAnimacaoDisk = new System.Windows.Forms.PictureBox();
-            this.picAnimacaoSFC = new System.Windows.Forms.PictureBox();
-            this.picAnimacaoDISM = new System.Windows.Forms.PictureBox();
+            this.btnRelatorio = new System.Windows.Forms.Button();
+            this.picAnimacaoRelatorio = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoDisk)).BeginInit();
+            this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoSFC)).BeginInit();
+            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoDISM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoRelatorio)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -73,22 +79,23 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(12, 46);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Location = new System.Drawing.Point(-3, 46);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(760, 703);
+            this.tabControl1.Size = new System.Drawing.Size(788, 703);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.Color.Gainsboro;
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(752, 677);
+            this.tabPage1.Size = new System.Drawing.Size(780, 677);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Bem Vindo";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -104,27 +111,43 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.btnAgendar);
+            this.tabPage2.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.picAnimacaoRelatorio);
+            this.tabPage2.Controls.Add(this.btnRelatorio);
+            this.tabPage2.Controls.Add(this.comboDiscos);
+            this.tabPage2.Controls.Add(this.btnVerificarDisco);
             this.tabPage2.Controls.Add(this.txtCKDOutput);
             this.tabPage2.Controls.Add(this.btnPegaRelatorio);
             this.tabPage2.Controls.Add(this.picAnimacaoDisk);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(752, 677);
+            this.tabPage2.Size = new System.Drawing.Size(780, 677);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "CheckDisk";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btnAgendar
+            // comboDiscos
             // 
-            this.btnAgendar.Location = new System.Drawing.Point(545, 545);
-            this.btnAgendar.Name = "btnAgendar";
-            this.btnAgendar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgendar.TabIndex = 11;
-            this.btnAgendar.Text = "&Agendar";
-            this.btnAgendar.UseVisualStyleBackColor = true;
-            this.btnAgendar.Click += new System.EventHandler(this.btnAgendar_Click);
+            this.comboDiscos.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.comboDiscos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDiscos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboDiscos.FormattingEnabled = true;
+            this.comboDiscos.Location = new System.Drawing.Point(135, 500);
+            this.comboDiscos.Name = "comboDiscos";
+            this.comboDiscos.Size = new System.Drawing.Size(516, 23);
+            this.comboDiscos.TabIndex = 12;
+            // 
+            // btnVerificarDisco
+            // 
+            this.btnVerificarDisco.Location = new System.Drawing.Point(576, 573);
+            this.btnVerificarDisco.Name = "btnVerificarDisco";
+            this.btnVerificarDisco.Size = new System.Drawing.Size(106, 23);
+            this.btnVerificarDisco.TabIndex = 11;
+            this.btnVerificarDisco.Text = "Verificar Disco";
+            this.btnVerificarDisco.UseVisualStyleBackColor = true;
+            this.btnVerificarDisco.Click += new System.EventHandler(this.btnAgendar_Click);
             // 
             // txtCKDOutput
             // 
@@ -136,12 +159,12 @@
             this.txtCKDOutput.Name = "txtCKDOutput";
             this.txtCKDOutput.ReadOnly = true;
             this.txtCKDOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtCKDOutput.Size = new System.Drawing.Size(746, 386);
+            this.txtCKDOutput.Size = new System.Drawing.Size(774, 386);
             this.txtCKDOutput.TabIndex = 6;
             // 
             // btnPegaRelatorio
             // 
-            this.btnPegaRelatorio.Location = new System.Drawing.Point(93, 545);
+            this.btnPegaRelatorio.Location = new System.Drawing.Point(347, 621);
             this.btnPegaRelatorio.Name = "btnPegaRelatorio";
             this.btnPegaRelatorio.Size = new System.Drawing.Size(89, 23);
             this.btnPegaRelatorio.TabIndex = 7;
@@ -149,18 +172,29 @@
             this.btnPegaRelatorio.UseVisualStyleBackColor = true;
             this.btnPegaRelatorio.Click += new System.EventHandler(this.btnPegaRelatorio_Click);
             // 
+            // picAnimacaoDisk
+            // 
+            this.picAnimacaoDisk.BackColor = System.Drawing.Color.Transparent;
+            this.picAnimacaoDisk.BackgroundImage = global::Manutenção_Windows.Properties.Resources._1;
+            this.picAnimacaoDisk.Location = new System.Drawing.Point(32, 32);
+            this.picAnimacaoDisk.Name = "picAnimacaoDisk";
+            this.picAnimacaoDisk.Size = new System.Drawing.Size(42, 42);
+            this.picAnimacaoDisk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picAnimacaoDisk.TabIndex = 9;
+            this.picAnimacaoDisk.TabStop = false;
+            // 
             // tabPage4
             // 
+            this.tabPage4.BackColor = System.Drawing.Color.Gainsboro;
             this.tabPage4.Controls.Add(this.label6);
             this.tabPage4.Controls.Add(this.txtSfcOutput);
             this.tabPage4.Controls.Add(this.btnSfc);
             this.tabPage4.Controls.Add(this.picAnimacaoSFC);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(752, 677);
+            this.tabPage4.Size = new System.Drawing.Size(780, 677);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "SFC";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -182,12 +216,12 @@
             this.txtSfcOutput.Name = "txtSfcOutput";
             this.txtSfcOutput.ReadOnly = true;
             this.txtSfcOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtSfcOutput.Size = new System.Drawing.Size(746, 386);
+            this.txtSfcOutput.Size = new System.Drawing.Size(774, 386);
             this.txtSfcOutput.TabIndex = 7;
             // 
             // btnSfc
             // 
-            this.btnSfc.Location = new System.Drawing.Point(303, 535);
+            this.btnSfc.Location = new System.Drawing.Point(299, 579);
             this.btnSfc.Name = "btnSfc";
             this.btnSfc.Size = new System.Drawing.Size(117, 23);
             this.btnSfc.TabIndex = 0;
@@ -195,8 +229,18 @@
             this.btnSfc.UseVisualStyleBackColor = true;
             this.btnSfc.Click += new System.EventHandler(this.btnSfc_Click);
             // 
+            // picAnimacaoSFC
+            // 
+            this.picAnimacaoSFC.Image = ((System.Drawing.Image)(resources.GetObject("picAnimacaoSFC.Image")));
+            this.picAnimacaoSFC.Location = new System.Drawing.Point(32, 32);
+            this.picAnimacaoSFC.Name = "picAnimacaoSFC";
+            this.picAnimacaoSFC.Size = new System.Drawing.Size(32, 32);
+            this.picAnimacaoSFC.TabIndex = 8;
+            this.picAnimacaoSFC.TabStop = false;
+            // 
             // tabPage3
             // 
+            this.tabPage3.BackColor = System.Drawing.Color.Gainsboro;
             this.tabPage3.Controls.Add(this.picAnimacaoDISM);
             this.tabPage3.Controls.Add(this.btnDismReparar);
             this.tabPage3.Controls.Add(this.txtDismOutput);
@@ -204,19 +248,28 @@
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(752, 677);
+            this.tabPage3.Size = new System.Drawing.Size(780, 677);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "DISM";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // picAnimacaoDISM
+            // 
+            this.picAnimacaoDISM.Image = ((System.Drawing.Image)(resources.GetObject("picAnimacaoDISM.Image")));
+            this.picAnimacaoDISM.Location = new System.Drawing.Point(32, 32);
+            this.picAnimacaoDISM.Name = "picAnimacaoDISM";
+            this.picAnimacaoDISM.Size = new System.Drawing.Size(32, 32);
+            this.picAnimacaoDISM.TabIndex = 10;
+            this.picAnimacaoDISM.TabStop = false;
             // 
             // btnDismReparar
             // 
-            this.btnDismReparar.Location = new System.Drawing.Point(546, 540);
+            this.btnDismReparar.BackColor = System.Drawing.Color.Transparent;
+            this.btnDismReparar.Location = new System.Drawing.Point(546, 575);
             this.btnDismReparar.Name = "btnDismReparar";
             this.btnDismReparar.Size = new System.Drawing.Size(94, 23);
             this.btnDismReparar.TabIndex = 9;
             this.btnDismReparar.Text = "Reparar DISM";
-            this.btnDismReparar.UseVisualStyleBackColor = true;
+            this.btnDismReparar.UseVisualStyleBackColor = false;
             this.btnDismReparar.Click += new System.EventHandler(this.btnDismReparar_Click);
             // 
             // txtDismOutput
@@ -229,12 +282,12 @@
             this.txtDismOutput.Name = "txtDismOutput";
             this.txtDismOutput.ReadOnly = true;
             this.txtDismOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDismOutput.Size = new System.Drawing.Size(746, 386);
+            this.txtDismOutput.Size = new System.Drawing.Size(774, 386);
             this.txtDismOutput.TabIndex = 8;
             // 
             // btnDismVerificar
             // 
-            this.btnDismVerificar.Location = new System.Drawing.Point(96, 540);
+            this.btnDismVerificar.Location = new System.Drawing.Point(96, 575);
             this.btnDismVerificar.Name = "btnDismVerificar";
             this.btnDismVerificar.Size = new System.Drawing.Size(105, 23);
             this.btnDismVerificar.TabIndex = 2;
@@ -242,41 +295,53 @@
             this.btnDismVerificar.UseVisualStyleBackColor = true;
             this.btnDismVerificar.Click += new System.EventHandler(this.btnDismVerificar_Click);
             // 
-            // picAnimacaoDisk
+            // btnRelatorio
             // 
-            this.picAnimacaoDisk.BackColor = System.Drawing.Color.Transparent;
-            this.picAnimacaoDisk.BackgroundImage = global::Manutenção_Windows.Properties.Resources._1;
-            this.picAnimacaoDisk.Location = new System.Drawing.Point(32, 32);
-            this.picAnimacaoDisk.Name = "picAnimacaoDisk";
-            this.picAnimacaoDisk.Size = new System.Drawing.Size(42, 42);
-            this.picAnimacaoDisk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picAnimacaoDisk.TabIndex = 9;
-            this.picAnimacaoDisk.TabStop = false;
+            this.btnRelatorio.Location = new System.Drawing.Point(79, 573);
+            this.btnRelatorio.Name = "btnRelatorio";
+            this.btnRelatorio.Size = new System.Drawing.Size(75, 23);
+            this.btnRelatorio.TabIndex = 14;
+            this.btnRelatorio.Text = "Relatório";
+            this.btnRelatorio.UseVisualStyleBackColor = true;
+            this.btnRelatorio.Click += new System.EventHandler(this.btnRelatorio_Click);
             // 
-            // picAnimacaoSFC
+            // picAnimacaoRelatorio
             // 
-            this.picAnimacaoSFC.Image = ((System.Drawing.Image)(resources.GetObject("picAnimacaoSFC.Image")));
-            this.picAnimacaoSFC.Location = new System.Drawing.Point(32, 32);
-            this.picAnimacaoSFC.Name = "picAnimacaoSFC";
-            this.picAnimacaoSFC.Size = new System.Drawing.Size(32, 32);
-            this.picAnimacaoSFC.TabIndex = 8;
-            this.picAnimacaoSFC.TabStop = false;
+            this.picAnimacaoRelatorio.Location = new System.Drawing.Point(32, 32);
+            this.picAnimacaoRelatorio.Name = "picAnimacaoRelatorio";
+            this.picAnimacaoRelatorio.Size = new System.Drawing.Size(42, 42);
+            this.picAnimacaoRelatorio.TabIndex = 15;
+            this.picAnimacaoRelatorio.TabStop = false;
+            this.picAnimacaoRelatorio.Visible = false;
             // 
-            // picAnimacaoDISM
+            // label2
             // 
-            this.picAnimacaoDISM.Image = ((System.Drawing.Image)(resources.GetObject("picAnimacaoDISM.Image")));
-            this.picAnimacaoDISM.Location = new System.Drawing.Point(32, 32);
-            this.picAnimacaoDISM.Name = "picAnimacaoDISM";
-            this.picAnimacaoDISM.Size = new System.Drawing.Size(32, 32);
-            this.picAnimacaoDISM.TabIndex = 10;
-            this.picAnimacaoDISM.TabStop = false;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 505);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(109, 13);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Selecione a Unidade:";
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(93, 14);
+            this.label4.Name = "label4";
+            this.label4.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label4.Size = new System.Drawing.Size(627, 72);
+            this.label4.TabIndex = 17;
+            this.label4.Text = resources.GetString("label4.Text");
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 761);
+            this.ClientSize = new System.Drawing.Size(780, 732);
             this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manutenção Windows";
@@ -286,13 +351,14 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoDisk)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoSFC)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoDisk)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoSFC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoDISM)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoRelatorio)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -308,7 +374,7 @@
         private System.Windows.Forms.Button btnPegaRelatorio;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox picAnimacaoDisk;
-        private System.Windows.Forms.Button btnAgendar;
+        private System.Windows.Forms.Button btnVerificarDisco;
         private System.Windows.Forms.Button btnSfc;
         private System.Windows.Forms.TextBox txtSfcOutput;
         private System.Windows.Forms.PictureBox picAnimacaoSFC;
@@ -317,5 +383,10 @@
         private System.Windows.Forms.TextBox txtDismOutput;
         private System.Windows.Forms.Button btnDismReparar;
         private System.Windows.Forms.PictureBox picAnimacaoDISM;
+        private System.Windows.Forms.ComboBox comboDiscos;
+        private System.Windows.Forms.Button btnRelatorio;
+        private System.Windows.Forms.PictureBox picAnimacaoRelatorio;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Manutenção_Windows.Services;
+﻿using Manutenção_Windows.Models;
+using Manutenção_Windows.Services;
 using Manutenção_Windows.Utils;
 using System;
 using System.Collections.ObjectModel;
@@ -17,6 +18,8 @@ namespace Manutenção_Windows
     {
 
         private ImageSequenceAnimator _animacao;
+
+        private CheckDiskService _checkDiskService;
 
         public Form1()
         {
@@ -44,52 +47,140 @@ namespace Manutenção_Windows
 
 
 
-        private async Task<string> agendarChkdskAsync(String script)
-        {
-            Runspace runspace = RunspaceFactory.CreateRunspace();
-            runspace.Open();
-            Pipeline pipeline = runspace.CreatePipeline();
-            pipeline.Commands.AddScript(script);
-            pipeline.Commands.Add("Out-String");
-            await Task.Delay(5000);
-            pipeline.Commands.AddScript("Y");
-            pipeline.Commands.Add("Out-String");
-
-
-
-
-
-            //   Collection<PSObject> results = pipeline.Invoke();
-            runspace.Close();
-            //     StringBuilder stringBuilder = new StringBuilder();
-            ////      foreach (PSObject pSObject in results)
-            //           stringBuilder.AppendLine(pSObject.ToString());
-            return "b";
-
-
-        }
 
    
 
-        private void btnPegaRelatorio_Click(object sender, EventArgs e)
+        private async void btnPegaRelatorio_Click(object sender, EventArgs e) // teste
         {
-            string comandoChk = "get-winevent -FilterHashTable @{logname=\"Application\"; id=\"1001\"}| ?{$_.providername –match \"wininit\"} | fl timecreated, message\r\n";
-            txtCKDOutput.Clear();
-            txtCKDOutput.Text = RunScript(comandoChk);
+              string comandoChk = "get-winevent -FilterHashTable @{logname=\"Application\"; id=\"1001\"}| ?{$_.providername –match \"wininit\"} | fl timecreated, message\r\n";
+              txtCKDOutput.Clear(); 
+              txtCKDOutput.Text = RunScript(comandoChk);
+
+         
         }
 
-    
 
-        private void btnAgendar_Click(object sender, EventArgs e)
+
+
+        private async void btnRelatorio_Click(object sender, EventArgs e) // Exibe relatorio por unidade selecionada
         {
-            //   string comandoChk = "chkdsk C: /f /r /x";
-            //   txtCKDOutput.Clear();
-            //    RunScript(comandoChk);
 
-            _animacao = new ImageSequenceAnimator(picAnimacaoDisk, @"Resources\anim_DISK", 250); // Inicio da animação da lupa
+            picAnimacaoRelatorio.Visible = true;
+            _animacao = new ImageSequenceAnimator(picAnimacaoRelatorio, @"Resources\anim_Relatorio", 250); // Inicio da animação da lupa
             _animacao.Start();
-      
+            btnRelatorio.Enabled = false;
 
+            try
+            {
+
+                if (comboDiscos.SelectedItem == null)
+                {
+                    MessageBox.Show("Selecione uma unidade.");
+                    return;
+                }
+
+                var disco = (DiskInfoModel)comboDiscos.SelectedItem;
+
+                txtCKDOutput.Text = $"Buscando relatório da unidade {disco.Letra}...\r\n";
+
+                DateTime inicio = DateTime.Now.AddDays(-30);
+
+                await Task.Run(() =>
+                {
+                    string relatorio =
+                        _checkDiskService.LerRelatorioPorUnidade(inicio, disco.Letra);
+
+                    Invoke(new Action(() =>
+                    {
+                        txtCKDOutput.Text = relatorio;
+                    }));
+                });
+
+            }
+            finally
+            {
+                btnRelatorio.Enabled = true;
+            }
+            _animacao.Stop();
+            picAnimacaoRelatorio.Visible = false;
+
+        }
+
+
+
+        private async void btnAgendar_Click(object sender, EventArgs e) // Executa verificação
+        {
+
+            this.TopMost = true; // Força a janela do app ficar em primeiro plano
+
+            _animacao = new ImageSequenceAnimator(
+        picAnimacaoDisk,
+        @"Resources\anim_DISK",
+        250);
+
+            _animacao.Start();
+
+
+            txtCKDOutput.Clear();
+            txtCKDOutput.AppendText("Executando CheckDisk...\r\n");
+
+            if (comboDiscos.SelectedItem == null)
+                return;
+
+            var disco = (DiskInfoModel)comboDiscos.SelectedItem;
+
+            System.Media.SystemSounds.Asterisk.Play();
+
+            // ==========================
+            // DISCO DO SISTEMA
+            // ==========================
+            if (_checkDiskService.PrecisaAgendarNoBoot(disco))
+            {
+                var resp = MessageBox.Show(
+                    $"A unidade {disco.Letra} está em uso pelo sistema.\n\n" +
+                    "Deseja agendar a verificação para o próximo boot?",
+                    "CHKDSK",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (resp == DialogResult.Yes)
+                {
+                    await _checkDiskService.AgendarNoBootAsync(disco);
+
+                    MessageBox.Show(
+                        "Verificação agendada com sucesso.\n\n" +
+                        "Ela será executada na próxima inicialização.",
+                        "CHKDSK",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    System.Media.SystemSounds.Exclamation.Play();
+                }
+
+                _animacao.Stop();
+                return; // ⬅️ MUITO IMPORTANTE
+            }
+
+            // ==========================
+            // DISCO NÃO SISTEMA
+            // ==========================
+
+            DateTime inicioChk = DateTime.Now;
+
+            await _checkDiskService.ExecutarAsync(disco);
+
+            // Aguarda o evento ser gravado no log
+            await Task.Delay(3000);
+
+            txtCKDOutput.Clear();
+            txtCKDOutput.Text =
+                _checkDiskService.LerUltimoRelatorioChkDsk(inicioChk);
+
+            System.Media.SystemSounds.Hand.Play();
+
+            _animacao.Stop();
+
+            this.TopMost = false; // Força a janela do app ficar em primeiro plano
 
         }
 
@@ -243,13 +334,25 @@ namespace Manutenção_Windows
 
 
 
+
+
+
         private void Form1_Load(object sender, EventArgs e) 
         {
             new SoundPlayer(Properties.Resources.Win95_Boot).Play(); // Assim que a janela abrir, toca a música de boot
 
+            _checkDiskService = new CheckDiskService();
+            var unidades = _checkDiskService.ListarUnidades();
+            comboDiscos.DataSource = unidades; // Preenche o combo box com as unidades de armazenamento
 
 
         }
+
+       
+
+
+
+
 
     }
 }

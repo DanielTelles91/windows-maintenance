@@ -122,6 +122,10 @@
 Ele detecta corrupção na estrutura interna do Windows e pode baixar componentes corretos do Windows Update para substituir arquivos danificados.
 </value>
   </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>O Check Disk é uma ferramenta nativa do Windows que verifica a integridade do sistema de arquivos e do disco rígido e SSD.
+Ela identifica erros lógicos, setores defeituosos e inconsistências no volume, podendo corrigi-los automaticamente para garantir a estabilidade e a segurança dos dados.</value>
+  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>O System File Checker verifica a integridade dos arquivos essenciais do Windows e repara automaticamente aqueles que estiverem corrompidos, ausentes ou modificados.
 Ele compara os arquivos do sistema com versões originais armazenadas pelo Windows e, se encontrar problemas, tenta restaurá-los para garantir o funcionamento correto do sistema operacional.
