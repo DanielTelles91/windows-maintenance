@@ -81,44 +81,43 @@ namespace Manutenção_Windows.Services
         // ================================
         // AGENDAR CHKDSK NO BOOT
         // ================================
-        public  Task AgendarNoBootAsync(DiskInfoModel disco)
+        public Task AgendarNoBootAsync(DiskInfoModel disco)
         {
             return Task.Run(() =>
             {
                 const string keyPath =
                     @"SYSTEM\CurrentControlSet\Control\Session Manager";
 
-                using (var key = Registry.LocalMachine.OpenSubKey(keyPath, writable: true))
+                using (var key = Registry.LocalMachine.OpenSubKey(keyPath, true))
                 {
                     if (key == null)
                         throw new Exception("Não foi possível acessar o Registro.");
 
-                    var bootExecute =
-                        key.GetValue("BootExecute") as string[];
+                    var bootExecute = key.GetValue("BootExecute") as string[]
+                                      ?? new string[0];
 
-                    if (bootExecute == null || bootExecute.Length == 0)
-                    {
-                        bootExecute = new[] { "autocheck autochk *" };
-                    }
+                    string comandoChk =
+                        string.Format("autocheck autochk /r \\??\\{0}", disco.Letra);
 
-                    string comando =
-                        $"autocheck autochk /r \\??\\{disco.Letra}";
+                    const string comandoPadrao =
+                        "autocheck autochk *";
 
-                    // evita duplicar
-                    if (bootExecute.Any(v => v.Contains(disco.Letra)))
-                        return;
+                    // Remove duplicações e entradas antigas do disco
+                    var lista = bootExecute
+                        .Where(v => !v.Contains(disco.Letra))
+                        .Where(v => v != comandoPadrao)
+                        .ToList();
 
-                    var novoValor =
-                        bootExecute.Concat(new[] { comando }).ToArray();
+                    // Ordem correta
+                    lista.Insert(0, comandoChk);
+                    lista.Add(comandoPadrao);
 
                     key.SetValue(
                         "BootExecute",
-                        novoValor,
+                        lista.ToArray(),
                         RegistryValueKind.MultiString);
                 }
             });
-
-
         }
 
 
@@ -148,7 +147,9 @@ Select-Object -First 1 -ExpandProperty Message
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                CreateNoWindow = true
+                CreateNoWindow = true,
+                StandardOutputEncoding = Encoding.GetEncoding(850), // CP850 (OEM)
+                StandardErrorEncoding = Encoding.GetEncoding(850)
             };
 
             using (var p = Process.Start(psi))
@@ -175,26 +176,38 @@ Select-Object -First 1 -ExpandProperty Message
 
         public string LerRelatorioPorUnidade(DateTime inicio, string letraUnidade)
         {
+
+            string providerName;
+            int eventId;
+
+
+            if (letraUnidade.Equals("C:", StringComparison.OrdinalIgnoreCase))
+            {
+                providerName = "Wininit";
+                eventId = 1001;
+            }
+            else
+            {
+                providerName = "Chkdsk";
+                eventId = 26214;
+
+            }
+
+
+
+            // comando PowerShell dinâmico
             string psCommand = $@"
-Get-WinEvent -FilterHashtable @{{
-    LogName='Application';
-    StartTime=(Get-Date '{inicio:yyyy-MM-dd HH:mm:ss}')
-}} |
-Where-Object {{
-    (
-        ($_.ProviderName -eq 'Chkdsk' -and $_.Id -eq 26214) -or
-        ($_.ProviderName -eq 'Wininit' -and $_.Id -eq 1001)
-    ) -and
-    $_.Message -match '{letraUnidade}'
-}} |
+get-winevent -FilterHashTable @{{logname='Application'; id={eventId}}} |
+Where-Object {{ $_.providername -match '{providerName}' }} |
+Where-Object {{ $_.Message -match 'Verificando o sistema de arquivos em {letraUnidade}' }} |
 Sort-Object TimeCreated -Descending |
 Select-Object -First 1 |
 ForEach-Object {{
-    '[Data: ' + $_.TimeCreated.ToString('dd/MM/yyyy HH:mm:ss') + ']' +
-    [Environment]::NewLine +
-    $_.Message
-}}
-";
+    '[Data: ' + $_.TimeCreated.ToString('dd/MM/yyyy HH:mm:ss') + ']' + [Environment]::NewLine + $_.Message
+}}";
+
+
+
 
             var psi = new ProcessStartInfo
             {
@@ -203,7 +216,9 @@ ForEach-Object {{
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                CreateNoWindow = true
+                CreateNoWindow = true,
+                StandardOutputEncoding = Encoding.GetEncoding(850), // CP850 (OEM)
+                StandardErrorEncoding = Encoding.GetEncoding(850)  // Para exibir palavras com acentos
             };
 
             using (var p = Process.Start(psi))
@@ -213,13 +228,17 @@ ForEach-Object {{
                 p.WaitForExit();
 
                 if (!string.IsNullOrWhiteSpace(error))
+                {
                     return "Erro ao ler relatório:\n" + error;
-
+                }
                 return string.IsNullOrWhiteSpace(output)
                     ? $"Nenhum relatório encontrado para {letraUnidade}."
                     : output.Trim();
             }
         }
+
+
+
 
 
     }

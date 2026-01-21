@@ -7,7 +7,7 @@
     <ProjectGuid>{537CD634-B76D-462C-9C04-7A8651608AB1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Manutenção_Windows</RootNamespace>
-    <AssemblyName>Manutenção Windows</AssemblyName>
+    <AssemblyName>Windoctor</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -68,6 +68,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>Custom</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>LogoPrograma.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -144,15 +147,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\tumblr_6f41690f782d77e9b463d52b66a8ec54_0f726df2_540.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\tumblr_6f41690f782d77e9b463d52b66a8ec54_0f726df2_5401.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\sfcIcon.jpg" />
-  </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <None Include="Resources\Win95_Boot.wav" />
@@ -164,46 +158,22 @@
     <None Include="Resources\Win95_Erro.WAV" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\anim_DISK\1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\anim_DISK\2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\anim_DISK\3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\anim_DISK\4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\anim_DISM\search_laptop_1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\anim_DISM\search_laptop_2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\anim_DISM\search_laptop_3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\anim_DISM\search_laptop_4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\anim_Relatorio\Relatorio-3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\anim_Relatorio\Relatorio-4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\anim_Relatorio\Relatorio-5.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\anim_Relatorio\Relatorio-6.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\anim_Relatorio\Relatorio-7.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="Resources\search_laptop_1.png" />
+    <Content Include="2LogoPrograma.ico" />
+    <Content Include="LogoPrograma.ico" />
+    <None Include="Resources\LogoPrograma.PNG" />
+    <None Include="Resources\relatorio5.png" />
+    <None Include="Resources\relatorio4.png" />
+    <None Include="Resources\relatorio3.png" />
+    <None Include="Resources\relatorio2.png" />
+    <None Include="Resources\relatorio1.png" />
+    <None Include="Resources\disco4.png" />
+    <None Include="Resources\disco3.png" />
+    <None Include="Resources\disco2.png" />
+    <None Include="Resources\disco1.png" />
+    <None Include="Resources\lupa4.png" />
+    <None Include="Resources\lupa3.png" />
+    <None Include="Resources\lupa2.png" />
+    <None Include="Resources\lupa1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

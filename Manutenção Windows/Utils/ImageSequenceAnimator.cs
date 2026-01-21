@@ -30,6 +30,21 @@ namespace Manutenção_Windows.Utils
             _timer.Tick += (s, e) => AvancarFrame();
         }
 
+        //  NOVO CONSTRUTOR (RESOURCES EMBUTIDOS)
+        public ImageSequenceAnimator(PictureBox pictureBox, Image[] frames, int intervalo = 250)
+        {
+            _pictureBox = pictureBox;
+            _frames = frames;
+
+            if (_frames == null || _frames.Length == 0)
+                throw new Exception("Nenhuma imagem encontrada para animação.");
+
+            _timer = new Timer();
+            _timer.Interval = intervalo;
+            _timer.Tick += (s, e) => AvancarFrame();
+        }
+
+
         private void AvancarFrame()
         {
             _pictureBox.Image = _frames[_frameAtual];

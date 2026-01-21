@@ -3,6 +3,7 @@ using Manutenção_Windows.Services;
 using Manutenção_Windows.Utils;
 using System;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Linq;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
@@ -26,53 +27,32 @@ namespace Manutenção_Windows
             InitializeComponent();
         }
 
-      
-
-        private string RunScript(String script)
-        {
-            Runspace runspace = RunspaceFactory.CreateRunspace();
-            runspace.Open();
-            Pipeline pipeline = runspace.CreatePipeline();
-            pipeline.Commands.AddScript(script);
-            pipeline.Commands.Add("Out-String");
-            Collection<PSObject> results = pipeline.Invoke();
-            runspace.Close();
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (PSObject pSObject in results)
-                stringBuilder.AppendLine(pSObject.ToString());
-            return stringBuilder.ToString();
-
-        }
-
-
-
-
-
-   
-
-        private async void btnPegaRelatorio_Click(object sender, EventArgs e) // teste
-        {
-              string comandoChk = "get-winevent -FilterHashTable @{logname=\"Application\"; id=\"1001\"}| ?{$_.providername –match \"wininit\"} | fl timecreated, message\r\n";
-              txtCKDOutput.Clear(); 
-              txtCKDOutput.Text = RunScript(comandoChk);
-
-         
-        }
-
-
 
 
         private async void btnRelatorio_Click(object sender, EventArgs e) // Exibe relatorio por unidade selecionada
         {
 
             picAnimacaoRelatorio.Visible = true;
-            _animacao = new ImageSequenceAnimator(picAnimacaoRelatorio, @"Resources\anim_Relatorio", 250); // Inicio da animação da lupa
+            //_animacao = new ImageSequenceAnimator(picAnimacaoRelatorio, @"Resources\anim_Relatorio", 50); // Inicio da animação da lupa
+
+            _animacao = new ImageSequenceAnimator(
+                picAnimacaoRelatorio,
+                new Image[]
+                {
+                     Properties.Resources.relatorio1,
+                     Properties.Resources.relatorio2,
+                     Properties.Resources.relatorio3,
+                     Properties.Resources.relatorio4,
+                     Properties.Resources.relatorio5
+                },
+                50
+            );
+
             _animacao.Start();
             btnRelatorio.Enabled = false;
 
             try
             {
-
                 if (comboDiscos.SelectedItem == null)
                 {
                     MessageBox.Show("Selecione uma unidade.");
@@ -94,93 +74,113 @@ namespace Manutenção_Windows
                     {
                         txtCKDOutput.Text = relatorio;
                     }));
+                    new SoundPlayer(Properties.Resources.Win95_Ok).Play();
                 });
 
             }
+
             finally
             {
                 btnRelatorio.Enabled = true;
+                _animacao.Stop();
+                picAnimacaoRelatorio.Visible = false;
             }
-            _animacao.Stop();
-            picAnimacaoRelatorio.Visible = false;
+
+
 
         }
 
 
 
-        private async void btnAgendar_Click(object sender, EventArgs e) // Executa verificação
+        private async void btnVerificarDisco_Click(object sender, EventArgs e) // Executa verificação
         {
 
             this.TopMost = true; // Força a janela do app ficar em primeiro plano
+                                 //_animacao = new ImageSequenceAnimator(picAnimacaoDisk, @"Resources\anim_DISK", 250);
 
             _animacao = new ImageSequenceAnimator(
-        picAnimacaoDisk,
-        @"Resources\anim_DISK",
-        250);
+                picAnimacaoDisk,
+                new Image[]
+                {
+                     Properties.Resources.disco1,
+                     Properties.Resources.disco2,
+                     Properties.Resources.disco3,
+                     Properties.Resources.disco4
+                },
+                250
+            );
 
             _animacao.Start();
+            btnVerificarDisco.Enabled = false;
 
-
-            txtCKDOutput.Clear();
-            txtCKDOutput.AppendText("Executando CheckDisk...\r\n");
-
-            if (comboDiscos.SelectedItem == null)
-                return;
-
-            var disco = (DiskInfoModel)comboDiscos.SelectedItem;
-
-            System.Media.SystemSounds.Asterisk.Play();
-
-            // ==========================
-            // DISCO DO SISTEMA
-            // ==========================
-            if (_checkDiskService.PrecisaAgendarNoBoot(disco))
+            try
             {
-                var resp = MessageBox.Show(
-                    $"A unidade {disco.Letra} está em uso pelo sistema.\n\n" +
-                    "Deseja agendar a verificação para o próximo boot?",
-                    "CHKDSK",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
+                txtCKDOutput.Clear();
+                txtCKDOutput.AppendText("Executando CheckDisk...\r\n");
 
-                if (resp == DialogResult.Yes)
+                if (comboDiscos.SelectedItem == null)
+                    return;
+
+                var disco = (DiskInfoModel)comboDiscos.SelectedItem;
+
+                System.Media.SystemSounds.Asterisk.Play();
+
+                // ==========================
+                // DISCO DO SISTEMA
+                // ==========================
+                if (_checkDiskService.PrecisaAgendarNoBoot(disco))
                 {
-                    await _checkDiskService.AgendarNoBootAsync(disco);
-
-                    MessageBox.Show(
-                        "Verificação agendada com sucesso.\n\n" +
-                        "Ela será executada na próxima inicialização.",
+                    var resp = MessageBox.Show(
+                        $"A unidade {disco.Letra} está em uso pelo sistema.\n\n" +
+                        "Deseja agendar a verificação para o próximo boot?",
                         "CHKDSK",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
 
-                    System.Media.SystemSounds.Exclamation.Play();
+                    if (resp == DialogResult.Yes)
+                    {
+                        await _checkDiskService.AgendarNoBootAsync(disco);
+
+                        MessageBox.Show(
+                            "Verificação agendada com sucesso.\n\n" +
+                            "Ela será executada na próxima inicialização.",
+                            "CHKDSK",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+
+                        System.Media.SystemSounds.Exclamation.Play();
+                    }
+
+                    _animacao.Stop();
+                    return; // MUITO IMPORTANTE
                 }
 
+                // ==========================
+                // DISCO NÃO SISTEMA
+                // ==========================
+
+                DateTime inicioChk = DateTime.Now;
+
+                await _checkDiskService.ExecutarAsync(disco);
+
+                // Aguarda o evento ser gravado no log
+                await Task.Delay(3000);
+
+                txtCKDOutput.Clear();
+                txtCKDOutput.Text =
+                    _checkDiskService.LerUltimoRelatorioChkDsk(inicioChk);
+
+                new SoundPlayer(Properties.Resources.Win95_Ok).Play();
+
+
+            }
+            finally
+            {
+                btnVerificarDisco.Enabled = true;
                 _animacao.Stop();
-                return; // ⬅️ MUITO IMPORTANTE
+                this.TopMost = false; // Força a janela do app ficar em primeiro plano
             }
 
-            // ==========================
-            // DISCO NÃO SISTEMA
-            // ==========================
-
-            DateTime inicioChk = DateTime.Now;
-
-            await _checkDiskService.ExecutarAsync(disco);
-
-            // Aguarda o evento ser gravado no log
-            await Task.Delay(3000);
-
-            txtCKDOutput.Clear();
-            txtCKDOutput.Text =
-                _checkDiskService.LerUltimoRelatorioChkDsk(inicioChk);
-
-            System.Media.SystemSounds.Hand.Play();
-
-            _animacao.Stop();
-
-            this.TopMost = false; // Força a janela do app ficar em primeiro plano
 
         }
 
@@ -191,35 +191,54 @@ namespace Manutenção_Windows
         private async void btnSfc_Click(object sender, EventArgs e)
         {
 
-            _animacao = new ImageSequenceAnimator(picAnimacaoSFC, @"Resources\anim_DISM", 250); // Inicio da animação da lupa
-            _animacao.Start();
-            this.TopMost = true; // Força a janela do app ficar em primeiro plano.
-
-            txtSfcOutput.Clear();
-            txtSfcOutput.AppendText("Executando SFC...\r\n");
-
-            var service = new SfcService();
-            var resultados = await service.ExecutarAsync();
-
-            txtSfcOutput.Clear();
-
-            if (resultados.Count == 0)
+            try
             {
-                txtSfcOutput.Text = ":) Nenhuma corrupção encontrada.";
-                new SoundPlayer(Properties.Resources.Win95_Ok).Play();
+                btnSfc.Enabled = false;
+                //  _animacao = new ImageSequenceAnimator(picAnimacaoSFC, @"Resources\anim_DISM", 250); // Inicio da animação da lupa
+
+                _animacao = new ImageSequenceAnimator(
+                    picAnimacaoSFC,
+                    new Image[]
+                    {
+                     Properties.Resources.lupa1,
+                     Properties.Resources.lupa2,
+                     Properties.Resources.lupa3,
+                     Properties.Resources.lupa4
+                    },
+                    250
+                );
+
+                _animacao.Start();
+                this.TopMost = true; // Força a janela do app ficar em primeiro plano.
+
+                txtSfcOutput.Clear();
+                txtSfcOutput.AppendText("Executando SFC...\r\n");
+
+                var service = new SfcService();
+                var resultados = await service.ExecutarAsync();
+
+                txtSfcOutput.Clear();
+
+                if (resultados.Count == 0)
+                {
+                    txtSfcOutput.Text = ":) Nenhuma corrupção encontrada.";
+                    new SoundPlayer(Properties.Resources.Win95_Ok).Play();
+                }
+                else
+                {
+                    txtSfcOutput.Text = ":( Arquivos reparados:\r\n\r\n";
+                    new SoundPlayer(Properties.Resources.Win95_Erro).Play();
+
+                    foreach (var r in resultados)
+                        txtSfcOutput.AppendText(r + Environment.NewLine);
+                }
             }
-            else
+            finally
             {
-                txtSfcOutput.Text = ":( Arquivos reparados:\r\n\r\n";
-                new SoundPlayer(Properties.Resources.Win95_Erro).Play();
-
-                foreach (var r in resultados)
-                    txtSfcOutput.AppendText(r + Environment.NewLine);
+                btnSfc.Enabled = true;
+                _animacao.Stop();
+                this.TopMost = false; // Força a janela do app ficar em primeiro plano.
             }
-
-
-            _animacao.Stop();
-            this.TopMost = false; // Força a janela do app ficar em primeiro plano.
 
         }
 
@@ -228,8 +247,21 @@ namespace Manutenção_Windows
 
         private async void btnDismVerificar_Click(object sender, EventArgs e)
         {
-        
-            _animacao = new ImageSequenceAnimator(picAnimacaoDISM, @"Resources\anim_DISM", 250); // Inicio da animação da lupa
+
+            // _animacao = new ImageSequenceAnimator(picAnimacaoDISM, @"Resources\anim_DISM", 250); // Inicio da animação da lupa
+
+            _animacao = new ImageSequenceAnimator(
+                picAnimacaoDISM,
+                new Image[]
+                {
+                     Properties.Resources.lupa1,
+                     Properties.Resources.lupa2,
+                     Properties.Resources.lupa3,
+                     Properties.Resources.lupa4
+                },
+                250
+            );
+
             _animacao.Start();
             this.TopMost = true; // Força a janela do app ficar em primeiro plano.
 
@@ -237,7 +269,7 @@ namespace Manutenção_Windows
 
             var service = new DISMService();
             var resultados = await service.ExecutarAsync();
-           
+
 
 
             txtDismOutput.Clear();
@@ -278,13 +310,26 @@ namespace Manutenção_Windows
 
         }
 
-   
+
 
 
         private async void btnDismReparar_Click(object sender, EventArgs e)
         {
 
-            _animacao = new ImageSequenceAnimator(picAnimacaoDISM, @"Resources\anim_DISM", 250); // Inicio da animação da lupa
+            // _animacao = new ImageSequenceAnimator(picAnimacaoDISM, @"Resources\anim_DISM", 250); // Inicio da animação da lupa
+
+            _animacao = new ImageSequenceAnimator(
+                picAnimacaoDISM,
+                new Image[]
+                {
+                     Properties.Resources.lupa1,
+                     Properties.Resources.lupa2,
+                     Properties.Resources.lupa3,
+                     Properties.Resources.lupa4
+                },
+                250
+            );
+
             _animacao.Start();
             this.TopMost = true; // Força a janela do app ficar em primeiro plano
 
@@ -328,7 +373,7 @@ namespace Manutenção_Windows
                 new SoundPlayer(Properties.Resources.Win95_Ok).Play();
             }
             _animacao.Stop(); // Para a animação da lupa
-            this.TopMost = false;
+            this.TopMost = false; // A janela no app não fica forçado em primeiro plano
 
         }
 
@@ -337,7 +382,7 @@ namespace Manutenção_Windows
 
 
 
-        private void Form1_Load(object sender, EventArgs e) 
+        private void Form1_Load(object sender, EventArgs e)
         {
             new SoundPlayer(Properties.Resources.Win95_Boot).Play(); // Assim que a janela abrir, toca a música de boot
 
@@ -347,11 +392,6 @@ namespace Manutenção_Windows
 
 
         }
-
-       
-
-
-
 
 
     }
