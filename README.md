@@ -1,30 +1,12 @@
-## Author
-
-Developed by Daniel Arantes Telles
-
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-
-## Development Status
-
-This project is still in development.
-It is not production-ready yet and should be used for testing or learning purposes only.
-
-
 ## Windows Maintenance Tool
 
 As a child, I always wondered how Windows applications were built.
-
 This project is a practical answer to that question.
 
 
 ## Overview
 
 Windows Maintenance Tool is a desktop application built with C# and WinForms, designed to simplify essential Windows maintenance tasks while exposing diagnostic information that is usually hidden from end users.
-
 The goal of this project is not only automation, but transparency — allowing users to clearly see what the system is doing, what was found, and what was fixed.
 
 
@@ -39,6 +21,20 @@ The goal of this project is not only automation, but transparency — allowing u
 - Visual and audio feedback inspired by classic Windows (95/98 era)
 
 
+## Screenshot
+
+
+## Demo Video
+
+
+## Technologies Used
+
+- C#
+- .NET (WinForms)
+- Windows system utilities (SFC, DISM, CHKDSK)
+- Log parsing and process execution with elevated privileges
+
+
 ## Purpose
 
 This project was created to:
@@ -50,16 +46,23 @@ This project was created to:
 - Combine classic UX concepts with modern Windows environments
 
 
-## Technologies Used
+## Development Status
 
-- C#
-- .NET (WinForms)
-- Windows system utilities (SFC, DISM, CHKDSK)
-- Log parsing and process execution with elevated privileges
+This project is still in development.
+It is not production-ready yet and should be used for testing or learning purposes only.
+
+
+## Author
+
+Developed by Daniel Arantes Telles
+
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 
 ## Notes
 
 This is a personal project developed as part of my technical portfolio.
-
 It reflects my interest in operating systems, diagnostics, system internals, and user-focused tooling.
