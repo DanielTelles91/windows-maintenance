@@ -30,6 +30,8 @@ The goal of this project is not only automation, but transparency — allowing u
 
 ## Demo Video
 
+https://github.com/user-attachments/assets/9eddab80-deeb-42a3-b0ce-922ac9443d91
+
 
 ## Technologies Used
 
