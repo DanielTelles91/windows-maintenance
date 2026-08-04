@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -39,7 +40,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
@@ -48,28 +48,40 @@
             this.comboDiscos = new System.Windows.Forms.ComboBox();
             this.btnVerificarDisco = new System.Windows.Forms.Button();
             this.txtCKDOutput = new System.Windows.Forms.TextBox();
-            this.picAnimacaoRelatorio = new System.Windows.Forms.PictureBox();
-            this.picAnimacaoDisk = new System.Windows.Forms.PictureBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.txtSfcOutput = new System.Windows.Forms.TextBox();
             this.btnSfc = new System.Windows.Forms.Button();
-            this.picAnimacaoSFC = new System.Windows.Forms.PictureBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.picAnimacaoDISM = new System.Windows.Forms.PictureBox();
             this.btnDismReparar = new System.Windows.Forms.Button();
             this.txtDismOutput = new System.Windows.Forms.TextBox();
             this.btnDismVerificar = new System.Windows.Forms.Button();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.btnFastBoot = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btnAnalisarBoot = new System.Windows.Forms.Button();
+            this.btnGerarDumpBoot = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnRelatorioBoot = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picAnimacaoRelatorio = new System.Windows.Forms.PictureBox();
+            this.picAnimacaoDisk = new System.Windows.Forms.PictureBox();
+            this.picAnimacaoSFC = new System.Windows.Forms.PictureBox();
+            this.picAnimacaoDISM = new System.Windows.Forms.PictureBox();
+            this.picAnaliseBoot = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoRelatorio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoDisk)).BeginInit();
-            this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoSFC)).BeginInit();
-            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoDISM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAnaliseBoot)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -87,11 +99,12 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(-3, 12);
+            this.tabControl1.Location = new System.Drawing.Point(-3, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(788, 737);
+            this.tabControl1.Size = new System.Drawing.Size(788, 749);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 6;
             // 
@@ -110,7 +123,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(780, 711);
+            this.tabPage1.Size = new System.Drawing.Size(780, 723);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Bem Vindo";
             // 
@@ -185,15 +198,6 @@
             this.label5.TabIndex = 2;
             this.label5.Text = "Desenvolvido por: Daniel Arantes Telles";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Manutenção_Windows.Properties.Resources.LogoPrograma;
-            this.pictureBox1.Location = new System.Drawing.Point(285, 150);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(179, 110);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -220,7 +224,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(780, 711);
+            this.tabPage2.Size = new System.Drawing.Size(780, 723);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "CheckDisk";
             // 
@@ -289,26 +293,6 @@
             this.txtCKDOutput.Size = new System.Drawing.Size(774, 386);
             this.txtCKDOutput.TabIndex = 6;
             // 
-            // picAnimacaoRelatorio
-            // 
-            this.picAnimacaoRelatorio.Location = new System.Drawing.Point(32, 32);
-            this.picAnimacaoRelatorio.Name = "picAnimacaoRelatorio";
-            this.picAnimacaoRelatorio.Size = new System.Drawing.Size(42, 42);
-            this.picAnimacaoRelatorio.TabIndex = 15;
-            this.picAnimacaoRelatorio.TabStop = false;
-            this.picAnimacaoRelatorio.Visible = false;
-            // 
-            // picAnimacaoDisk
-            // 
-            this.picAnimacaoDisk.BackColor = System.Drawing.Color.Transparent;
-            this.picAnimacaoDisk.Image = global::Manutenção_Windows.Properties.Resources.disco1;
-            this.picAnimacaoDisk.Location = new System.Drawing.Point(32, 32);
-            this.picAnimacaoDisk.Name = "picAnimacaoDisk";
-            this.picAnimacaoDisk.Size = new System.Drawing.Size(42, 42);
-            this.picAnimacaoDisk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picAnimacaoDisk.TabIndex = 9;
-            this.picAnimacaoDisk.TabStop = false;
-            // 
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.Gainsboro;
@@ -318,7 +302,7 @@
             this.tabPage4.Controls.Add(this.picAnimacaoSFC);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(780, 711);
+            this.tabPage4.Size = new System.Drawing.Size(780, 723);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "SFC";
             // 
@@ -355,15 +339,6 @@
             this.btnSfc.UseVisualStyleBackColor = true;
             this.btnSfc.Click += new System.EventHandler(this.btnSfc_Click);
             // 
-            // picAnimacaoSFC
-            // 
-            this.picAnimacaoSFC.Image = global::Manutenção_Windows.Properties.Resources.lupa1;
-            this.picAnimacaoSFC.Location = new System.Drawing.Point(32, 32);
-            this.picAnimacaoSFC.Name = "picAnimacaoSFC";
-            this.picAnimacaoSFC.Size = new System.Drawing.Size(32, 32);
-            this.picAnimacaoSFC.TabIndex = 8;
-            this.picAnimacaoSFC.TabStop = false;
-            // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.Gainsboro;
@@ -374,18 +349,9 @@
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(780, 711);
+            this.tabPage3.Size = new System.Drawing.Size(780, 723);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "DISM";
-            // 
-            // picAnimacaoDISM
-            // 
-            this.picAnimacaoDISM.Image = global::Manutenção_Windows.Properties.Resources.lupa1;
-            this.picAnimacaoDISM.Location = new System.Drawing.Point(32, 32);
-            this.picAnimacaoDISM.Name = "picAnimacaoDISM";
-            this.picAnimacaoDISM.Size = new System.Drawing.Size(32, 32);
-            this.picAnimacaoDISM.TabIndex = 10;
-            this.picAnimacaoDISM.TabStop = false;
             // 
             // btnDismReparar
             // 
@@ -421,6 +387,131 @@
             this.btnDismVerificar.UseVisualStyleBackColor = true;
             this.btnDismVerificar.Click += new System.EventHandler(this.btnDismVerificar_Click);
             // 
+            // tabPage6
+            // 
+            this.tabPage6.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabPage6.Controls.Add(this.picAnaliseBoot);
+            this.tabPage6.Controls.Add(this.btnFastBoot);
+            this.tabPage6.Controls.Add(this.label13);
+            this.tabPage6.Controls.Add(this.btnAnalisarBoot);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(780, 723);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Análise de Boot";
+            // 
+            // btnFastBoot
+            // 
+            this.btnFastBoot.Location = new System.Drawing.Point(569, 180);
+            this.btnFastBoot.Name = "btnFastBoot";
+            this.btnFastBoot.Size = new System.Drawing.Size(135, 37);
+            this.btnFastBoot.TabIndex = 4;
+            this.btnFastBoot.Text = "Análise Fast Startup";
+            this.btnFastBoot.UseVisualStyleBackColor = true;
+            this.btnFastBoot.Click += new System.EventHandler(this.btnFastBoot_Click);
+            // 
+            // label13
+            // 
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(94, 14);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(627, 99);
+            this.label13.TabIndex = 3;
+            this.label13.Text = resources.GetString("label13.Text");
+            // 
+            // btnAnalisarBoot
+            // 
+            this.btnAnalisarBoot.Location = new System.Drawing.Point(97, 180);
+            this.btnAnalisarBoot.Name = "btnAnalisarBoot";
+            this.btnAnalisarBoot.Size = new System.Drawing.Size(121, 37);
+            this.btnAnalisarBoot.TabIndex = 1;
+            this.btnAnalisarBoot.Text = "Análise Performance de Boot";
+            this.btnAnalisarBoot.UseVisualStyleBackColor = true;
+            this.btnAnalisarBoot.Click += new System.EventHandler(this.btnAnalisarBoot_Click);
+            // 
+            // btnGerarDumpBoot
+            // 
+            this.btnGerarDumpBoot.Location = new System.Drawing.Point(0, 0);
+            this.btnGerarDumpBoot.Name = "btnGerarDumpBoot";
+            this.btnGerarDumpBoot.Size = new System.Drawing.Size(75, 23);
+            this.btnGerarDumpBoot.TabIndex = 0;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(0, 0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 0;
+            // 
+            // btnRelatorioBoot
+            // 
+            this.btnRelatorioBoot.Location = new System.Drawing.Point(0, 0);
+            this.btnRelatorioBoot.Name = "btnRelatorioBoot";
+            this.btnRelatorioBoot.Size = new System.Drawing.Size(75, 23);
+            this.btnRelatorioBoot.TabIndex = 0;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Manutenção_Windows.Properties.Resources.LogoPrograma;
+            this.pictureBox1.Location = new System.Drawing.Point(285, 150);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(179, 110);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // picAnimacaoRelatorio
+            // 
+            this.picAnimacaoRelatorio.Location = new System.Drawing.Point(32, 32);
+            this.picAnimacaoRelatorio.Name = "picAnimacaoRelatorio";
+            this.picAnimacaoRelatorio.Size = new System.Drawing.Size(42, 42);
+            this.picAnimacaoRelatorio.TabIndex = 15;
+            this.picAnimacaoRelatorio.TabStop = false;
+            this.picAnimacaoRelatorio.Visible = false;
+            // 
+            // picAnimacaoDisk
+            // 
+            this.picAnimacaoDisk.BackColor = System.Drawing.Color.Transparent;
+            this.picAnimacaoDisk.Image = global::Manutenção_Windows.Properties.Resources.disco1;
+            this.picAnimacaoDisk.Location = new System.Drawing.Point(32, 32);
+            this.picAnimacaoDisk.Name = "picAnimacaoDisk";
+            this.picAnimacaoDisk.Size = new System.Drawing.Size(42, 42);
+            this.picAnimacaoDisk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picAnimacaoDisk.TabIndex = 9;
+            this.picAnimacaoDisk.TabStop = false;
+            // 
+            // picAnimacaoSFC
+            // 
+            this.picAnimacaoSFC.Image = global::Manutenção_Windows.Properties.Resources.lupa1;
+            this.picAnimacaoSFC.Location = new System.Drawing.Point(32, 32);
+            this.picAnimacaoSFC.Name = "picAnimacaoSFC";
+            this.picAnimacaoSFC.Size = new System.Drawing.Size(32, 32);
+            this.picAnimacaoSFC.TabIndex = 8;
+            this.picAnimacaoSFC.TabStop = false;
+            // 
+            // picAnimacaoDISM
+            // 
+            this.picAnimacaoDISM.Image = global::Manutenção_Windows.Properties.Resources.lupa1;
+            this.picAnimacaoDISM.Location = new System.Drawing.Point(32, 32);
+            this.picAnimacaoDISM.Name = "picAnimacaoDISM";
+            this.picAnimacaoDISM.Size = new System.Drawing.Size(32, 32);
+            this.picAnimacaoDISM.TabIndex = 10;
+            this.picAnimacaoDISM.TabStop = false;
+            // 
+            // picAnaliseBoot
+            // 
+            this.picAnaliseBoot.Image = global::Manutenção_Windows.Properties.Resources.AnaliseBoot;
+            this.picAnaliseBoot.Location = new System.Drawing.Point(28, 32);
+            this.picAnaliseBoot.Name = "picAnaliseBoot";
+            this.picAnaliseBoot.Size = new System.Drawing.Size(50, 49);
+            this.picAnaliseBoot.TabIndex = 5;
+            this.picAnaliseBoot.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -437,17 +528,19 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoRelatorio)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoDisk)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoSFC)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoRelatorio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoDisk)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoSFC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoDISM)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAnaliseBoot)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -484,5 +577,14 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnRelatorioBoot;
+        private System.Windows.Forms.Button btnGerarDumpBoot;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.Button btnAnalisarBoot;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btnFastBoot;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.PictureBox picAnaliseBoot;
     }
 }

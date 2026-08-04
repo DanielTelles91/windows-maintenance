@@ -63,6 +63,16 @@ namespace Manutenção_Windows.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AnaliseBoot {
+            get {
+                object obj = ResourceManager.GetObject("AnaliseBoot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap disco1 {
             get {
                 object obj = ResourceManager.GetObject("disco1", resourceCulture);

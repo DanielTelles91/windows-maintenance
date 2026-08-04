@@ -117,30 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Deployment Image Servicing and Management verifica e repara a imagem do sistema do Windows usada como base para restaurar arquivos do sistema.
-Ele detecta corrupção na estrutura interna do Windows e pode baixar componentes corretos do Windows Update para substituir arquivos danificados.
-</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>O Check Disk é uma ferramenta nativa do Windows que verifica a integridade do sistema de arquivos e do disco rígido e SSD.
-Ela identifica erros lógicos, setores defeituosos e inconsistências no volume, podendo corrigi-los automaticamente para garantir a estabilidade e a segurança dos dados.</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>O System File Checker verifica a integridade dos arquivos essenciais do Windows e repara automaticamente aqueles que estiverem corrompidos, ausentes ou modificados.
-Ele compara os arquivos do sistema com versões originais armazenadas pelo Windows e, se encontrar problemas, tenta restaurá-los para garantir o funcionamento correto do sistema operacional.
-</value>
-  </data>
-  <data name="label13.Text" xml:space="preserve">
-    <value>A Análise de Performance do Boot monitora o tempo de inicialização do Windows e identifica aplicativos, drivers e serviços que impactam negativamente o desempenho do sistema durante o boot.
-
-Ela utiliza os mecanismos de diagnóstico nativos do Windows para exibir informações detalhadas sobre atrasos na inicialização, permitindo identificar componentes que aumentam o tempo de carregamento do sistema operacional.</value>
-  </data>
-  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+  <metadata name="Data.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>51</value>
+  <metadata name="Nome.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

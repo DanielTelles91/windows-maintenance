@@ -1,8 +1,11 @@
-﻿using Manutenção_Windows.Models;
+﻿using Manutenção_Windows.Forms;
+using Manutenção_Windows.Models;
 using Manutenção_Windows.Services;
 using Manutenção_Windows.Utils;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Management.Automation;
@@ -21,6 +24,8 @@ namespace Manutenção_Windows
         private ImageSequenceAnimator _animacao;
 
         private CheckDiskService _checkDiskService;
+
+        private List<BootPerformanceModel> _dadosBoot;
 
         public Form1()
         {
@@ -390,9 +395,106 @@ namespace Manutenção_Windows
             var unidades = _checkDiskService.ListarUnidades();
             comboDiscos.DataSource = unidades; // Preenche o combo box com as unidades de armazenamento
 
+        
+        
+
 
         }
 
-       
+
+
+
+
+
+
+
+        private async void btnAnalisarBoot_Click(object sender, EventArgs e)
+        {
+
+            var service =
+                    new BootPerformanceService();
+
+
+            var boots =
+                    await service.ListarBootsAsync();
+
+
+            if (boots.Count == 0)
+            {
+                MessageBox.Show(
+                    "Nenhum registro de boot encontrado.");
+
+                return;
+            }
+
+
+            AnalisarPerfBoot form =
+                    new AnalisarPerfBoot(
+                            service,
+                            boots);
+
+
+            form.ShowDialog(this);
+
+
+        }
+
+        //  private async void btnFastBoot_Click(object sender, EventArgs e)
+        //  {
+        //     var service = new FastBootService();
+        //     var diagnostico = await service.DiagnosticarAsync();
+        //    new FastBootReportForm(diagnostico).ShowDialog(this);
+
+        //  }
+
+        private void btnFastBoot_Click(
+            object sender,
+            EventArgs e)
+        {
+
+            var form =
+                new AnalisarFastStartup();
+
+
+            form.ShowDialog();
+
+        }
+
+        private async void btnAnalisarPerfBoot_Click(
+                       object sender,
+                       EventArgs e)
+        {
+
+            var service =
+                    new BootPerformanceService();
+
+
+            var boots =
+                    await service.ListarBootsAsync();
+
+
+            if (boots.Count == 0)
+            {
+                MessageBox.Show(
+                    "Nenhum registro de boot encontrado.");
+
+                return;
+            }
+
+
+            AnalisarPerfBoot form =
+                    new AnalisarPerfBoot(
+                            service,
+                            boots);
+
+
+            form.ShowDialog(this);
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
