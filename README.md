@@ -22,9 +22,15 @@ The goal of this project is not only automation, but transparency — allowing u
 
 
 ## Screenshot
-
+<p align="center">
+  <img src="screenshots/telaInicial.png" width="32%">
+  <img src="screenshots/chkdsk.png" width="32%">
+  <img src="screenshots/Dism.png" width="32%">
+</p>
 
 ## Demo Video
+
+https://github.com/user-attachments/assets/9eddab80-deeb-42a3-b0ce-922ac9443d91
 
 
 ## Technologies Used
