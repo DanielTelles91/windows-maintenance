@@ -157,6 +157,7 @@
     <Compile Include="Services\FastBootService.cs" />
     <Compile Include="Services\PowerShellService.cs" />
     <Compile Include="Services\SfcService.cs" />
+    <Compile Include="Services\SystemCleanupAnalysisService.cs" />
     <Compile Include="Utils\ImageSequenceAnimator.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
