@@ -163,6 +163,36 @@ namespace Manutenção_Windows.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Pasta_Lupa_1 {
+            get {
+                object obj = ResourceManager.GetObject("Pasta_Lupa_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pasta_Lupa_2 {
+            get {
+                object obj = ResourceManager.GetObject("Pasta_Lupa_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pasta_Lupa_3 {
+            get {
+                object obj = ResourceManager.GetObject("Pasta_Lupa_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap relatorio1 {
             get {
                 object obj = ResourceManager.GetObject("relatorio1", resourceCulture);
@@ -206,6 +236,36 @@ namespace Manutenção_Windows.Properties {
         internal static System.Drawing.Bitmap relatorio5 {
             get {
                 object obj = ResourceManager.GetObject("relatorio5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap vassoura_1 {
+            get {
+                object obj = ResourceManager.GetObject("vassoura_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap vassoura_2 {
+            get {
+                object obj = ResourceManager.GetObject("vassoura_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap vassoura_3 {
+            get {
+                object obj = ResourceManager.GetObject("vassoura_3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

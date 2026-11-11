@@ -122,6 +122,11 @@
 Ele detecta corrupção na estrutura interna do Windows e pode baixar componentes corretos do Windows Update para substituir arquivos danificados.
 </value>
   </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>A Limpeza do Sistema remove arquivos temporários acumulados na pasta Temp do Windows e na pasta Temp do usuário, liberando espaço em disco sem afetar documentos ou configurações pessoais.
+Também executa a análise do repositório de componentes do Windows (WinSxS) pelo DISM, que informa o tamanho real ocupado e indica se uma limpeza de componentes antigos é recomendada.
+</value>
+  </data>
   <data name="label4.Text" xml:space="preserve">
     <value>O Check Disk é uma ferramenta nativa do Windows que verifica a integridade do sistema de arquivos e do disco rígido e SSD.
 Ela identifica erros lógicos, setores defeituosos e inconsistências no volume, podendo corrigi-los automaticamente para garantir a estabilidade e a segurança dos dados.</value>

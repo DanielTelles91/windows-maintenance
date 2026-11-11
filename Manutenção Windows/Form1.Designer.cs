@@ -67,6 +67,9 @@
             this.label13 = new System.Windows.Forms.Label();
             this.btnAnalisarBoot = new System.Windows.Forms.Button();
             this.tabLimpeza = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.picAnimacaoLimpezaSistema = new System.Windows.Forms.PictureBox();
+            this.lblAvisoWinSxS = new System.Windows.Forms.Label();
             this.lblStatusLimpeza = new System.Windows.Forms.Label();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.lblTotalLimpeza = new System.Windows.Forms.Label();
@@ -82,7 +85,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.btnRelatorioBoot = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.lblAvisoWinSxS = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -96,6 +98,7 @@
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAnaliseBoot)).BeginInit();
             this.tabLimpeza.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoLimpezaSistema)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -498,10 +501,10 @@
             // picAnaliseBoot
             // 
             this.picAnaliseBoot.Image = global::Manutenção_Windows.Properties.Resources.AnaliseBoot;
-            this.picAnaliseBoot.Location = new System.Drawing.Point(37, 39);
+            this.picAnaliseBoot.Location = new System.Drawing.Point(43, 39);
             this.picAnaliseBoot.Margin = new System.Windows.Forms.Padding(4);
             this.picAnaliseBoot.Name = "picAnaliseBoot";
-            this.picAnaliseBoot.Size = new System.Drawing.Size(67, 60);
+            this.picAnaliseBoot.Size = new System.Drawing.Size(43, 39);
             this.picAnaliseBoot.TabIndex = 5;
             this.picAnaliseBoot.TabStop = false;
             // 
@@ -540,6 +543,8 @@
             // tabLimpeza
             // 
             this.tabLimpeza.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabLimpeza.Controls.Add(this.label15);
+            this.tabLimpeza.Controls.Add(this.picAnimacaoLimpezaSistema);
             this.tabLimpeza.Controls.Add(this.lblAvisoWinSxS);
             this.tabLimpeza.Controls.Add(this.lblStatusLimpeza);
             this.tabLimpeza.Controls.Add(this.btnLimpar);
@@ -554,6 +559,35 @@
             this.tabLimpeza.Size = new System.Drawing.Size(1043, 890);
             this.tabLimpeza.TabIndex = 6;
             this.tabLimpeza.Text = "Limpeza do Sistema";
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(124, 17);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(844, 129);
+            this.label15.TabIndex = 9;
+            this.label15.Text = resources.GetString("label15.Text");
+            // 
+            // picAnimacaoLimpezaSistema
+            // 
+            this.picAnimacaoLimpezaSistema.Image = global::Manutenção_Windows.Properties.Resources.vassoura_1;
+            this.picAnimacaoLimpezaSistema.Location = new System.Drawing.Point(43, 39);
+            this.picAnimacaoLimpezaSistema.Name = "picAnimacaoLimpezaSistema";
+            this.picAnimacaoLimpezaSistema.Size = new System.Drawing.Size(43, 39);
+            this.picAnimacaoLimpezaSistema.TabIndex = 8;
+            this.picAnimacaoLimpezaSistema.TabStop = false;
+            // 
+            // lblAvisoWinSxS
+            // 
+            this.lblAvisoWinSxS.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAvisoWinSxS.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lblAvisoWinSxS.Location = new System.Drawing.Point(12, 414);
+            this.lblAvisoWinSxS.Name = "lblAvisoWinSxS";
+            this.lblAvisoWinSxS.Size = new System.Drawing.Size(660, 191);
+            this.lblAvisoWinSxS.TabIndex = 7;
+            this.lblAvisoWinSxS.Text = "label15";
+            this.lblAvisoWinSxS.Visible = false;
             // 
             // lblStatusLimpeza
             // 
@@ -578,7 +612,7 @@
             // 
             this.lblTotalLimpeza.AutoSize = true;
             this.lblTotalLimpeza.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalLimpeza.Location = new System.Drawing.Point(704, 383);
+            this.lblTotalLimpeza.Location = new System.Drawing.Point(704, 413);
             this.lblTotalLimpeza.Name = "lblTotalLimpeza";
             this.lblTotalLimpeza.Size = new System.Drawing.Size(233, 20);
             this.lblTotalLimpeza.TabIndex = 4;
@@ -596,7 +630,7 @@
             this.listViewLimpeza.FullRowSelect = true;
             this.listViewLimpeza.GridLines = true;
             this.listViewLimpeza.HideSelection = false;
-            this.listViewLimpeza.Location = new System.Drawing.Point(4, 119);
+            this.listViewLimpeza.Location = new System.Drawing.Point(4, 149);
             this.listViewLimpeza.Name = "listViewLimpeza";
             this.listViewLimpeza.Scrollable = false;
             this.listViewLimpeza.Size = new System.Drawing.Size(1024, 259);
@@ -645,11 +679,11 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(363, 36);
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(114, 19);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(299, 17);
+            this.label14.Size = new System.Drawing.Size(0, 20);
             this.label14.TabIndex = 0;
-            this.label14.Text = "Análise e limpeza de arquivos desnecessários";
             // 
             // btnGerarDumpBoot
             // 
@@ -677,17 +711,6 @@
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // lblAvisoWinSxS
-            // 
-            this.lblAvisoWinSxS.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvisoWinSxS.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.lblAvisoWinSxS.Location = new System.Drawing.Point(12, 384);
-            this.lblAvisoWinSxS.Name = "lblAvisoWinSxS";
-            this.lblAvisoWinSxS.Size = new System.Drawing.Size(660, 191);
-            this.lblAvisoWinSxS.TabIndex = 7;
-            this.lblAvisoWinSxS.Text = "label15";
-            this.lblAvisoWinSxS.Visible = false;
             // 
             // Form1
             // 
@@ -722,6 +745,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picAnaliseBoot)).EndInit();
             this.tabLimpeza.ResumeLayout(false);
             this.tabLimpeza.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAnimacaoLimpezaSistema)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -780,5 +804,7 @@
         private System.Windows.Forms.Label lblTotalLimpeza;
         private System.Windows.Forms.Label lblStatusLimpeza;
         private System.Windows.Forms.Label lblAvisoWinSxS;
+        private System.Windows.Forms.PictureBox picAnimacaoLimpezaSistema;
+        private System.Windows.Forms.Label label15;
     }
 }

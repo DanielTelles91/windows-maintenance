@@ -544,6 +544,28 @@ namespace Manutenção_Windows
 
             int concluidas = 0;
 
+
+
+
+
+            _animacao = new ImageSequenceAnimator(
+        picAnimacaoLimpezaSistema,
+        new Image[]
+        {
+                 Properties.Resources.Pasta_Lupa_1,
+                 Properties.Resources.Pasta_Lupa_2,
+                 Properties.Resources.Pasta_Lupa_3,
+        },
+        500
+    );
+
+            _animacao.Start();
+
+
+
+
+
+
             try
             {
                 // 1 - TEMP do usuário
@@ -718,6 +740,9 @@ namespace Manutenção_Windows
                 progressLimpeza.Value = 0;
 
                 btnAnalisarLimpeza.Enabled = true;
+
+                _animacao.Stop();
+                
 
                 // A limpeza ainda não foi implementada!!!!
                 btnLimpar.Enabled = false;
