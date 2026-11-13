@@ -10,6 +10,11 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
+/**
+ *
+ * @author Daniel Arantes Telles
+ */
+
 namespace Manutenção_Windows.Services
 {
     internal class FastBootService

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+
 //========================================================
 // Responsável por realizar cálculos e comparações entre
 // os boots analisados pelo sistema.

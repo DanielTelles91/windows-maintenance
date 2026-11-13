@@ -7,7 +7,7 @@ This project is a practical answer to that question.
 ## Overview
 
 Windows Maintenance Tool is a desktop application built with C# and WinForms, designed to simplify essential Windows maintenance tasks while exposing diagnostic information that is usually hidden from end users.
-The goal of this project is not only automation, but transparency — allowing users to clearly see what the system is doing, what was found, and what was fixed.
+The goal of this project is not only automation, but transparency allowing users to clearly see what the system is doing, what was found, and what was fixed.
 
 
 ## Features
@@ -55,7 +55,7 @@ This project was created to:
 ## Development Status
 
 This project is still in development.
-It is not production-ready yet and should be used for testing or learning purposes only.
+It is not production ready yet and should be used for testing or learning purposes only.
 
 
 ## Author
@@ -71,4 +71,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Notes
 
 This is a personal project developed as part of my technical portfolio.
-It reflects my interest in operating systems, diagnostics, system internals, and user-focused tooling.
+It reflects my interest in operating systems, diagnostics, system internals, and user focused tooling.

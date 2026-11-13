@@ -5,6 +5,11 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading.Tasks;
 
+/**
+ *
+ * @author Daniel Arantes Telles
+ */
+
 namespace Manutenção_Windows.Services
 {
     internal class DISMService

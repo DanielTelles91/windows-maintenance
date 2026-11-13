@@ -214,6 +214,7 @@
   <ItemGroup>
     <Content Include="2LogoPrograma.ico" />
     <Content Include="LogoPrograma.ico" />
+    <None Include="Resources\pic_analiseDeBoot.png" />
     <None Include="Resources\Pasta-Lupa_1.png" />
     <None Include="Resources\Pasta-Lupa_3.png" />
     <None Include="Resources\Pasta-Lupa_2.png" />

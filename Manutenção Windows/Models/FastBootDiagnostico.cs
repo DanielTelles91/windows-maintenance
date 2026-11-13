@@ -1,5 +1,10 @@
 ﻿using System.Collections.Generic;
 
+/**
+ *
+ * @author Daniel Arantes Telles
+ */
+
 namespace Manutenção_Windows.Models
 {
     public class FastBootDiagnostico

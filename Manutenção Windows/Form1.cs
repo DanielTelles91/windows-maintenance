@@ -4,17 +4,17 @@ using Manutenção_Windows.Services;
 using Manutenção_Windows.Utils;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Management.Automation;
-using System.Management.Automation.Runspaces;
 using System.Media;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+/**
+ *
+ * @author Daniel Arantes Telles
+ */
 
 namespace Manutenção_Windows
 {
@@ -385,9 +385,6 @@ namespace Manutenção_Windows
 
 
 
-
-
-
         private void Form1_Load(object sender, EventArgs e)
         {
             new SoundPlayer(Properties.Resources.Win95_Boot).Play(); // Assim que a janela abrir, toca a música de boot
@@ -396,17 +393,8 @@ namespace Manutenção_Windows
             var unidades = _checkDiskService.ListarUnidades();
             comboDiscos.DataSource = unidades; // Preenche o combo box com as unidades de armazenamento
 
-        
-        
-
 
         }
-
-
-
-
-
-
 
 
         private async void btnAnalisarBoot_Click(object sender, EventArgs e)
@@ -499,8 +487,40 @@ namespace Manutenção_Windows
         }
 
 
-
         private async void btnAnalisarLimpeza_Click(object sender, EventArgs e)
+        {
+            await AnalisarLimpezaAsync();
+        }
+
+
+
+        private string ObterPastaTempUsuario()
+        {
+            string pastaTemp = Environment.GetEnvironmentVariable("TEMP");
+
+            if (string.IsNullOrWhiteSpace(pastaTemp))
+                pastaTemp = Path.GetTempPath();
+
+            return pastaTemp;
+        }
+
+        private string ObterNomeCategoriaTemporaria(string pasta)
+        {
+            string pastaUsuario = ObterPastaTempUsuario();
+
+            if (string.Equals(
+                Path.GetFullPath(pasta).TrimEnd('\\'),
+                Path.GetFullPath(pastaUsuario).TrimEnd('\\'),
+                StringComparison.OrdinalIgnoreCase))
+            {
+                return "Temporários do usuário";
+            }
+
+            return "Temporários do Windows";
+        }
+
+
+        private async Task AnalisarLimpezaAsync()
         {
             lblAvisoWinSxS.Visible = false;
             lblAvisoWinSxS.Text = "";
@@ -574,11 +594,7 @@ namespace Manutenção_Windows
 
                 try
                 {
-                    string tempUsuario =
-                        Environment.GetEnvironmentVariable("TEMP");
-
-                    if (string.IsNullOrWhiteSpace(tempUsuario))
-                        tempUsuario = Path.GetTempPath();
+                    string tempUsuario = ObterPastaTempUsuario();
 
                     var resultadoUsuario =
                         await SystemCleanupAnalysisService.AnalyzeFolderAsync(tempUsuario);
@@ -689,17 +705,15 @@ namespace Manutenção_Windows
                                 resultadoDism.ActualSizeBytes.Value)
                             : "Não identificado";
 
-                        itemComponentStore.SubItems[3].Text =
-                            resultadoDism.CleanupRecommended == true
-                            ? "Limpeza recomendada"
-                            : resultadoDism.CleanupRecommended == false
-                                ? "Sem recomendação"
-                                : "Analisado";
+                        itemComponentStore.SubItems[3].Text = "Analisado ✓";
 
                         itemComponentStore.Tag = resultadoDism;
 
                         itemComponentStore.ToolTipText =
-                            $"Tamanho compartilhado com Windows: " +
+                            $"Tamanho real: " +
+                            $"{FormatarTamanhoLimpeza(resultadoDism.ActualSizeBytes ?? 0)}" +
+                            Environment.NewLine +
+                            $"Compartilhado com Windows: " +
                             $"{FormatarTamanhoLimpeza(resultadoDism.SharedSizeBytes ?? 0)}" +
                             Environment.NewLine +
                             $"Backups e recursos desabilitados: " +
@@ -711,8 +725,8 @@ namespace Manutenção_Windows
                             $"Pacotes recuperáveis: " +
                             $"{resultadoDism.ReclaimablePackages?.ToString() ?? "Não informado"}" +
                             Environment.NewLine +
-                            $"Limpeza recomendada: " +
-                            $"{resultadoDism.CleanupRecommended?.ToString() ?? "Não informado"}";
+                            $"Última limpeza: " +
+                            $"{resultadoDism.LastCleanupDate?.ToString("dd/MM/yyyy HH:mm:ss") ?? "Não informada"}";
 
                         concluidas++;
                     }
@@ -744,7 +758,6 @@ namespace Manutenção_Windows
                 _animacao.Stop();
                 
 
-                // A limpeza ainda não foi implementada!!!!
                 btnLimpar.Enabled = false;
                 AtualizarTotalLimpeza();
             }
@@ -772,15 +785,19 @@ namespace Manutenção_Windows
         private void AtualizarTotalLimpeza()
         {
             long totalBytes = 0;
+            bool componenteSelecionado = false;
 
             foreach (ListViewItem item in listViewLimpeza.Items)
             {
                 if (!item.Checked)
                     continue;
 
-                // O WinSxS não entra no cálculo.
+                // O WinSxS não entra no cálculo de espaço recuperável.
                 if (item.Text.Contains("Component Store"))
+                {
+                    componenteSelecionado = true;
                     continue;
+                }
 
                 if (item.Tag is long tamanho)
                 {
@@ -791,7 +808,8 @@ namespace Manutenção_Windows
             lblTotalLimpeza.Text =
                 "Espaço selecionado: " + FormatarTamanhoLimpeza(totalBytes);
 
-            btnLimpar.Enabled = totalBytes > 0;
+            // O botão também deve funcionar quando somente o WinSxS estiver marcado.
+            btnLimpar.Enabled = totalBytes > 0 || componenteSelecionado;
         }
 
 
@@ -799,6 +817,389 @@ namespace Manutenção_Windows
     object sender, ItemCheckedEventArgs e)
         {
             AtualizarTotalLimpeza();
+        }
+
+        private async void btnLimpar_Click(object sender, EventArgs e)
+        {
+            var pastasSelecionadas = new List<string>();
+            bool componenteSelecionado = false;
+
+            string pastaTempUsuario = ObterPastaTempUsuario();
+
+            string pastaTempWindows = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.Windows),
+                "Temp");
+
+            foreach (ListViewItem item in listViewLimpeza.Items)
+            {
+                if (!item.Checked)
+                    continue;
+
+                if (item.Text.Contains("Component Store"))
+                {
+                    componenteSelecionado = true;
+                }
+                else if (item.Text.Contains("Temporários do usuário"))
+                {
+                    pastasSelecionadas.Add(pastaTempUsuario);
+                }
+                else if (item.Text.Contains("Temporários do Windows"))
+                {
+                    pastasSelecionadas.Add(pastaTempWindows);
+                }
+            }
+
+            if (pastasSelecionadas.Count == 0 && !componenteSelecionado)
+            {
+                MessageBox.Show(
+                    "Nenhum item válido foi selecionado.",
+                    "Limpeza do Sistema",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
+            // 1 - Confirmação dos arquivos temporários.
+            if (pastasSelecionadas.Count > 0)
+            {
+                string mensagemTemporarios =
+                    "Deseja realmente limpar os seguintes locais?\n\n";
+
+                foreach (string pasta in pastasSelecionadas)
+                {
+                    string categoria = ObterNomeCategoriaTemporaria(pasta);
+
+                    mensagemTemporarios +=
+                        "• " + categoria + "\n" +
+                        "  " + pasta + "\n\n";
+                }
+
+                mensagemTemporarios +=
+                    "Arquivos em uso ou protegidos poderão ser ignorados.\n\n" +
+                    "Deseja continuar?";
+
+                DialogResult confirmacaoTemporarios = MessageBox.Show(
+                    mensagemTemporarios,
+                    "Confirmar limpeza dos temporários",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (confirmacaoTemporarios != DialogResult.Yes)
+                    return;
+
+                await ExecutarLimpezaAsync(pastasSelecionadas);
+            }
+
+            // 2 - Confirmação independente para o DISM.
+            if (componenteSelecionado)
+            {
+                string mensagemDism =
+                    "Deseja executar a manutenção do Component Store (WinSxS)?\n\n" +
+                    "O Windows utilizará o DISM para remover componentes " +
+                    "substituídos que não sejam mais necessários.\n\n" +
+                    "Essa operação pode demorar bastante, dependendo do sistema.\n\n" +
+                    "Não desligue o computador nem interrompa o processo.\n\n" +
+                    "Deseja continuar?";
+
+                DialogResult confirmacaoDism = MessageBox.Show(
+                    mensagemDism,
+                    "Confirmar manutenção do WinSxS",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (confirmacaoDism != DialogResult.Yes)
+                    return;
+
+                await ExecutarLimpezaComponentStoreAsync();
+            }
+        }
+
+
+
+        private async Task ExecutarLimpezaAsync(List<string> pastasSelecionadas)
+        {
+            int arquivosExcluidos = 0;
+            int arquivosIgnorados = 0;
+            int pastasExcluidas = 0;
+            int pastasIgnoradas = 0;
+            int falhas = 0;
+
+            long bytesLiberados = 0;
+
+            var detalhesPastas = new List<string>();
+
+            btnLimpar.Enabled = false;
+            btnAnalisarLimpeza.Enabled = false;
+
+            progressLimpeza.Style = ProgressBarStyle.Marquee;
+            progressLimpeza.MarqueeAnimationSpeed = 30;
+
+            lblStatusLimpeza.Text = "Executando limpeza...";
+
+            _animacao = new ImageSequenceAnimator(
+                picAnimacaoLimpezaSistema,
+                new Image[]
+                {
+            Properties.Resources.vassoura_1,
+            Properties.Resources.vassoura_2,
+            Properties.Resources.vassoura_3,
+                },
+                500
+            );
+
+            _animacao.Start();
+
+            try
+            {
+                foreach (string pasta in pastasSelecionadas)
+                {
+                    string nomeCategoria = ObterNomeCategoriaTemporaria(pasta);
+
+                    ListViewItem itemAtual = null;
+
+                    foreach (ListViewItem item in listViewLimpeza.Items)
+                    {
+                        if (item.Text.Contains(nomeCategoria))
+                        {
+                            itemAtual = item;
+                            break;
+                        }
+                    }
+
+                    if (itemAtual == null)
+                        continue;
+
+                    lblStatusLimpeza.Text = "Limpando: " + nomeCategoria + "...";
+                    itemAtual.SubItems[3].Text = "Limpando...";
+
+                    try
+                    {
+                        var resultado =
+                            await SystemCleanupAnalysisService.CleanFolderAsync(pasta);
+
+                        arquivosExcluidos += resultado.FilesDeleted;
+                        arquivosIgnorados += resultado.FilesSkipped;
+
+                        pastasExcluidas += resultado.DirectoriesDeleted;
+                        pastasIgnoradas += resultado.DirectoriesSkipped;
+
+                        bytesLiberados += resultado.BytesDeleted;
+
+                        detalhesPastas.Add(
+                            nomeCategoria + "\n" +
+                            "Local: " + pasta + "\n" +
+                            "Arquivos excluídos: " + resultado.FilesDeleted + "\n" +
+                            "Arquivos ignorados: " + resultado.FilesSkipped + "\n" +
+                            "Pastas removidas: " + resultado.DirectoriesDeleted + "\n" +
+                            "Pastas ignoradas: " + resultado.DirectoriesSkipped + "\n" +
+                            "Espaço contabilizado: " +
+                            FormatarTamanhoLimpeza(resultado.BytesDeleted));
+
+                        itemAtual.SubItems[2].Text =
+                            "Liberado: " +
+                            FormatarTamanhoLimpeza(resultado.BytesDeleted);
+
+                        itemAtual.SubItems[3].Text = "Concluído";
+                        itemAtual.Tag = 0L;
+                        itemAtual.Checked = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        falhas++;
+
+                        itemAtual.SubItems[3].Text = "Falha";
+
+                        detalhesPastas.Add(
+                            nomeCategoria + "\n" +
+                            "Local: " + pasta + "\n" +
+                            "Falha: " + ex.Message);
+                    }
+                }
+
+                AtualizarTotalLimpeza();
+
+                lblStatusLimpeza.Text =
+                    falhas == 0
+                    ? "Limpeza dos temporários finalizada."
+                    : "Limpeza finalizada com falhas.";
+
+                string relatorio =
+                    "Resultado da limpeza dos arquivos temporários\n\n";
+
+                relatorio +=
+                    string.Join(
+                        "\n\n------------------------------\n\n",
+                        detalhesPastas);
+
+                relatorio +=
+                    "\n\n==============================\n" +
+                    "RESUMO GERAL\n" +
+                    "==============================\n\n" +
+                    "Arquivos excluídos: " + arquivosExcluidos + "\n" +
+                    "Arquivos ignorados: " + arquivosIgnorados + "\n" +
+                    "Pastas removidas: " + pastasExcluidas + "\n" +
+                    "Pastas ignoradas: " + pastasIgnoradas + "\n" +
+                    "Falhas: " + falhas + "\n\n" +
+                    "Espaço contabilizado nos arquivos excluídos: " +
+                    FormatarTamanhoLimpeza(bytesLiberados);
+
+                MessageBox.Show(
+                    relatorio,
+                    "Relatório — Arquivos temporários",
+                    MessageBoxButtons.OK,
+                    falhas == 0
+                        ? MessageBoxIcon.Information
+                        : MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                progressLimpeza.Style = ProgressBarStyle.Blocks;
+                progressLimpeza.MarqueeAnimationSpeed = 0;
+
+                btnAnalisarLimpeza.Enabled = true;
+
+                AtualizarTotalLimpeza();
+
+                _animacao.Stop();
+            }
+        }
+
+
+
+        private async Task ExecutarLimpezaComponentStoreAsync()
+        {
+            btnLimpar.Enabled = false;
+            btnAnalisarLimpeza.Enabled = false;
+
+            progressLimpeza.Style = ProgressBarStyle.Marquee;
+            progressLimpeza.MarqueeAnimationSpeed = 30;
+
+            lblStatusLimpeza.Text = "Limpando Component Store (WinSxS)...";
+
+            ListViewItem itemWinSxS = null;
+
+            foreach (ListViewItem item in listViewLimpeza.Items)
+            {
+                if (item.Text.Contains("Component Store"))
+                {
+                    itemWinSxS = item;
+                    break;
+                }
+            }
+
+            try
+            {
+                if (itemWinSxS != null)
+                    itemWinSxS.SubItems[3].Text = "Limpando...";
+
+                var resultado =
+                    await SystemCleanupAnalysisService.CleanComponentStoreAsync();
+
+                if (resultado.ExitCode != 0)
+                {
+                    if (itemWinSxS != null)
+                        itemWinSxS.SubItems[3].Text = "Falha no DISM";
+
+                    MessageBox.Show(
+                        "O DISM não conseguiu concluir a limpeza.\n\n" +
+                        resultado.Output,
+                        "Erro na limpeza do Component Store",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+
+                    lblStatusLimpeza.Text =
+                        "Falha na limpeza do Component Store.";
+
+                    return;
+                }
+
+                lblStatusLimpeza.Text =
+                    "Manutenção concluída. Atualizando análise...";
+
+                MessageBox.Show(
+                    "A manutenção do Component Store foi concluída com sucesso!\n\n" +
+                    "O Windows realizou a manutenção do repositório de componentes.\n\n" +
+                    "Agora será feita uma nova análise para atualizar os dados.",
+                    "Limpeza concluída",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                // Atualiza os dados após a manutenção.
+                try
+                {
+                    await AnalisarLimpezaAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        "A manutenção do Component Store foi concluída, " +
+                        "mas não foi possível atualizar a análise.\n\n" +
+                        ex.Message,
+                        "Falha ao atualizar análise",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                }
+
+                // A análise recria os itens da ListView.
+                foreach (ListViewItem item in listViewLimpeza.Items)
+                {
+                    if (item.Text.Contains("Component Store"))
+                    {
+                        itemWinSxS = item;
+                        break;
+                    }
+                }
+
+                if (itemWinSxS != null)
+                {
+                    string resultadoAnalise = itemWinSxS.SubItems[3].Text;
+
+                    itemWinSxS.SubItems[3].Text = "Limpeza executada";
+
+                    itemWinSxS.ToolTipText +=
+                        Environment.NewLine +
+                        Environment.NewLine +
+                        "A manutenção do Component Store foi executada " +
+                        "com sucesso pelo DISM.";
+
+                    if (resultadoAnalise != "Analisado ✓")
+                    {
+                        itemWinSxS.ToolTipText +=
+                            Environment.NewLine +
+                            "A atualização da análise apresentou o seguinte estado: " +
+                            resultadoAnalise +
+                            ". Execute uma nova análise para atualizar os dados.";
+                    }
+                }
+
+                lblStatusLimpeza.Text =
+                    "Manutenção do Component Store concluída.";
+            }
+            catch (Exception ex)
+            {
+                if (itemWinSxS != null)
+                    itemWinSxS.SubItems[3].Text = "Falha";
+
+                lblStatusLimpeza.Text =
+                    "Erro ao executar a manutenção do Component Store.";
+
+                MessageBox.Show(
+                    "Erro ao executar a limpeza do Component Store:\n\n" +
+                    ex.Message,
+                    "Erro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            finally
+            {
+                progressLimpeza.Style = ProgressBarStyle.Blocks;
+                progressLimpeza.MarqueeAnimationSpeed = 0;
+
+                btnAnalisarLimpeza.Enabled = true;
+
+                AtualizarTotalLimpeza();
+            }
         }
 
 

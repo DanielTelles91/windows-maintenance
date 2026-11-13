@@ -1,4 +1,10 @@
 ﻿namespace Manutenção_Windows.Models
+
+/**
+ *
+ * @author Daniel Arantes Telles
+ */
+
 {
     public class BootSlowItem
     {

@@ -8,6 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/**
+ *
+ * @author Daniel Arantes Telles
+ */
+
 namespace Manutenção_Windows.Services
 {
     internal class CheckDiskService

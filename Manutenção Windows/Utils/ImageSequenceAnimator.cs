@@ -4,6 +4,11 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Drawing;
 
+/**
+ *
+ * @author Daniel Arantes Telles
+ */
+
 namespace Manutenção_Windows.Utils
 {
     internal class ImageSequenceAnimator

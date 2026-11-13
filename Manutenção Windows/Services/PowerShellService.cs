@@ -1,6 +1,10 @@
 ﻿using System.Diagnostics;
 using System.Text;
 
+/**
+ *
+ * @author Daniel Arantes Telles
+ */
 
 namespace Manutenção_Windows.Services
 {

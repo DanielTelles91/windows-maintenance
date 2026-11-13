@@ -121,7 +121,7 @@
             this.tabControl1.Controls.Add(this.tabLimpeza);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(-4, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(10, 4);
@@ -142,9 +142,9 @@
             this.tabPage1.Controls.Add(this.pictureBox1);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Location = new System.Drawing.Point(4, 28);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage1.Size = new System.Drawing.Size(1043, 890);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Bem Vindo";
@@ -231,7 +231,7 @@
             // 
             this.pictureBox1.Image = global::Manutenção_Windows.Properties.Resources.LogoPrograma;
             this.pictureBox1.Location = new System.Drawing.Point(380, 185);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(239, 135);
             this.pictureBox1.TabIndex = 1;
@@ -293,7 +293,7 @@
             // btnRelatorio
             // 
             this.btnRelatorio.Location = new System.Drawing.Point(105, 692);
-            this.btnRelatorio.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRelatorio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRelatorio.Name = "btnRelatorio";
             this.btnRelatorio.Size = new System.Drawing.Size(100, 28);
             this.btnRelatorio.TabIndex = 14;
@@ -308,7 +308,7 @@
             this.comboDiscos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboDiscos.FormattingEnabled = true;
             this.comboDiscos.Location = new System.Drawing.Point(180, 615);
-            this.comboDiscos.Margin = new System.Windows.Forms.Padding(4);
+            this.comboDiscos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboDiscos.Name = "comboDiscos";
             this.comboDiscos.Size = new System.Drawing.Size(687, 26);
             this.comboDiscos.TabIndex = 12;
@@ -317,7 +317,7 @@
             // 
             this.btnVerificarDisco.BackColor = System.Drawing.Color.White;
             this.btnVerificarDisco.Location = new System.Drawing.Point(768, 692);
-            this.btnVerificarDisco.Margin = new System.Windows.Forms.Padding(4);
+            this.btnVerificarDisco.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnVerificarDisco.Name = "btnVerificarDisco";
             this.btnVerificarDisco.Size = new System.Drawing.Size(141, 28);
             this.btnVerificarDisco.TabIndex = 11;
@@ -331,7 +331,7 @@
             this.txtCKDOutput.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCKDOutput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txtCKDOutput.Location = new System.Drawing.Point(4, 119);
-            this.txtCKDOutput.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCKDOutput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCKDOutput.Multiline = true;
             this.txtCKDOutput.Name = "txtCKDOutput";
             this.txtCKDOutput.ReadOnly = true;
@@ -342,7 +342,7 @@
             // picAnimacaoRelatorio
             // 
             this.picAnimacaoRelatorio.Location = new System.Drawing.Point(43, 39);
-            this.picAnimacaoRelatorio.Margin = new System.Windows.Forms.Padding(4);
+            this.picAnimacaoRelatorio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.picAnimacaoRelatorio.Name = "picAnimacaoRelatorio";
             this.picAnimacaoRelatorio.Size = new System.Drawing.Size(56, 52);
             this.picAnimacaoRelatorio.TabIndex = 15;
@@ -354,7 +354,7 @@
             this.picAnimacaoDisk.BackColor = System.Drawing.Color.Transparent;
             this.picAnimacaoDisk.Image = global::Manutenção_Windows.Properties.Resources.disco1;
             this.picAnimacaoDisk.Location = new System.Drawing.Point(43, 39);
-            this.picAnimacaoDisk.Margin = new System.Windows.Forms.Padding(4);
+            this.picAnimacaoDisk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.picAnimacaoDisk.Name = "picAnimacaoDisk";
             this.picAnimacaoDisk.Size = new System.Drawing.Size(56, 52);
             this.picAnimacaoDisk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -369,7 +369,7 @@
             this.tabPage4.Controls.Add(this.btnSfc);
             this.tabPage4.Controls.Add(this.picAnimacaoSFC);
             this.tabPage4.Location = new System.Drawing.Point(4, 28);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(1043, 890);
             this.tabPage4.TabIndex = 3;
@@ -392,7 +392,7 @@
             this.txtSfcOutput.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSfcOutput.ForeColor = System.Drawing.Color.White;
             this.txtSfcOutput.Location = new System.Drawing.Point(4, 119);
-            this.txtSfcOutput.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSfcOutput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSfcOutput.Multiline = true;
             this.txtSfcOutput.Name = "txtSfcOutput";
             this.txtSfcOutput.ReadOnly = true;
@@ -403,7 +403,7 @@
             // btnSfc
             // 
             this.btnSfc.Location = new System.Drawing.Point(399, 692);
-            this.btnSfc.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSfc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSfc.Name = "btnSfc";
             this.btnSfc.Size = new System.Drawing.Size(156, 28);
             this.btnSfc.TabIndex = 0;
@@ -415,7 +415,7 @@
             // 
             this.picAnimacaoSFC.Image = global::Manutenção_Windows.Properties.Resources.lupa1;
             this.picAnimacaoSFC.Location = new System.Drawing.Point(43, 39);
-            this.picAnimacaoSFC.Margin = new System.Windows.Forms.Padding(4);
+            this.picAnimacaoSFC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.picAnimacaoSFC.Name = "picAnimacaoSFC";
             this.picAnimacaoSFC.Size = new System.Drawing.Size(43, 39);
             this.picAnimacaoSFC.TabIndex = 8;
@@ -430,7 +430,7 @@
             this.tabPage3.Controls.Add(this.btnDismVerificar);
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Location = new System.Drawing.Point(4, 28);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(1043, 890);
             this.tabPage3.TabIndex = 2;
@@ -440,7 +440,7 @@
             // 
             this.picAnimacaoDISM.Image = global::Manutenção_Windows.Properties.Resources.lupa1;
             this.picAnimacaoDISM.Location = new System.Drawing.Point(43, 39);
-            this.picAnimacaoDISM.Margin = new System.Windows.Forms.Padding(4);
+            this.picAnimacaoDISM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.picAnimacaoDISM.Name = "picAnimacaoDISM";
             this.picAnimacaoDISM.Size = new System.Drawing.Size(43, 39);
             this.picAnimacaoDISM.TabIndex = 10;
@@ -450,7 +450,7 @@
             // 
             this.btnDismReparar.BackColor = System.Drawing.Color.Transparent;
             this.btnDismReparar.Location = new System.Drawing.Point(768, 692);
-            this.btnDismReparar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDismReparar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDismReparar.Name = "btnDismReparar";
             this.btnDismReparar.Size = new System.Drawing.Size(125, 28);
             this.btnDismReparar.TabIndex = 9;
@@ -464,7 +464,7 @@
             this.txtDismOutput.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDismOutput.ForeColor = System.Drawing.Color.White;
             this.txtDismOutput.Location = new System.Drawing.Point(4, 119);
-            this.txtDismOutput.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDismOutput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDismOutput.Multiline = true;
             this.txtDismOutput.Name = "txtDismOutput";
             this.txtDismOutput.ReadOnly = true;
@@ -475,7 +475,7 @@
             // btnDismVerificar
             // 
             this.btnDismVerificar.Location = new System.Drawing.Point(105, 692);
-            this.btnDismVerificar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDismVerificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDismVerificar.Name = "btnDismVerificar";
             this.btnDismVerificar.Size = new System.Drawing.Size(140, 28);
             this.btnDismVerificar.TabIndex = 2;
@@ -491,18 +491,18 @@
             this.tabPage6.Controls.Add(this.label13);
             this.tabPage6.Controls.Add(this.btnAnalisarBoot);
             this.tabPage6.Location = new System.Drawing.Point(4, 28);
-            this.tabPage6.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPage6.Size = new System.Drawing.Size(1043, 890);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Análise de Boot";
             // 
             // picAnaliseBoot
             // 
-            this.picAnaliseBoot.Image = global::Manutenção_Windows.Properties.Resources.AnaliseBoot;
+            this.picAnaliseBoot.Image = global::Manutenção_Windows.Properties.Resources.pic_analiseDeBoot;
             this.picAnaliseBoot.Location = new System.Drawing.Point(43, 39);
-            this.picAnaliseBoot.Margin = new System.Windows.Forms.Padding(4);
+            this.picAnaliseBoot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.picAnaliseBoot.Name = "picAnaliseBoot";
             this.picAnaliseBoot.Size = new System.Drawing.Size(43, 39);
             this.picAnaliseBoot.TabIndex = 5;
@@ -511,7 +511,7 @@
             // btnFastBoot
             // 
             this.btnFastBoot.Location = new System.Drawing.Point(759, 222);
-            this.btnFastBoot.Margin = new System.Windows.Forms.Padding(4);
+            this.btnFastBoot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnFastBoot.Name = "btnFastBoot";
             this.btnFastBoot.Size = new System.Drawing.Size(180, 46);
             this.btnFastBoot.TabIndex = 4;
@@ -532,7 +532,7 @@
             // btnAnalisarBoot
             // 
             this.btnAnalisarBoot.Location = new System.Drawing.Point(129, 222);
-            this.btnAnalisarBoot.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAnalisarBoot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAnalisarBoot.Name = "btnAnalisarBoot";
             this.btnAnalisarBoot.Size = new System.Drawing.Size(161, 46);
             this.btnAnalisarBoot.TabIndex = 1;
@@ -554,8 +554,9 @@
             this.tabLimpeza.Controls.Add(this.btnAnalisarLimpeza);
             this.tabLimpeza.Controls.Add(this.label14);
             this.tabLimpeza.Location = new System.Drawing.Point(4, 28);
+            this.tabLimpeza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabLimpeza.Name = "tabLimpeza";
-            this.tabLimpeza.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLimpeza.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabLimpeza.Size = new System.Drawing.Size(1043, 890);
             this.tabLimpeza.TabIndex = 6;
             this.tabLimpeza.Text = "Limpeza do Sistema";
@@ -573,6 +574,7 @@
             // 
             this.picAnimacaoLimpezaSistema.Image = global::Manutenção_Windows.Properties.Resources.vassoura_1;
             this.picAnimacaoLimpezaSistema.Location = new System.Drawing.Point(43, 39);
+            this.picAnimacaoLimpezaSistema.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picAnimacaoLimpezaSistema.Name = "picAnimacaoLimpezaSistema";
             this.picAnimacaoLimpezaSistema.Size = new System.Drawing.Size(43, 39);
             this.picAnimacaoLimpezaSistema.TabIndex = 8;
@@ -592,7 +594,7 @@
             // lblStatusLimpeza
             // 
             this.lblStatusLimpeza.AutoSize = true;
-            this.lblStatusLimpeza.Location = new System.Drawing.Point(182, 617);
+            this.lblStatusLimpeza.Location = new System.Drawing.Point(188, 608);
             this.lblStatusLimpeza.Name = "lblStatusLimpeza";
             this.lblStatusLimpeza.Size = new System.Drawing.Size(147, 17);
             this.lblStatusLimpeza.TabIndex = 6;
@@ -601,18 +603,20 @@
             // btnLimpar
             // 
             this.btnLimpar.Enabled = false;
-            this.btnLimpar.Location = new System.Drawing.Point(687, 677);
+            this.btnLimpar.Location = new System.Drawing.Point(805, 692);
+            this.btnLimpar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(148, 33);
             this.btnLimpar.TabIndex = 5;
             this.btnLimpar.Text = "Limpar selecionados";
             this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // lblTotalLimpeza
             // 
             this.lblTotalLimpeza.AutoSize = true;
             this.lblTotalLimpeza.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalLimpeza.Location = new System.Drawing.Point(704, 413);
+            this.lblTotalLimpeza.Location = new System.Drawing.Point(704, 414);
             this.lblTotalLimpeza.Name = "lblTotalLimpeza";
             this.lblTotalLimpeza.Size = new System.Drawing.Size(233, 20);
             this.lblTotalLimpeza.TabIndex = 4;
@@ -631,6 +635,7 @@
             this.listViewLimpeza.GridLines = true;
             this.listViewLimpeza.HideSelection = false;
             this.listViewLimpeza.Location = new System.Drawing.Point(4, 149);
+            this.listViewLimpeza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewLimpeza.Name = "listViewLimpeza";
             this.listViewLimpeza.Scrollable = false;
             this.listViewLimpeza.Size = new System.Drawing.Size(1024, 259);
@@ -642,7 +647,7 @@
             // Categoria
             // 
             this.Categoria.Text = "Categoria";
-            this.Categoria.Width = 260;
+            this.Categoria.Width = 230;
             // 
             // Localização
             // 
@@ -652,7 +657,7 @@
             // Tamanho
             // 
             this.Tamanho.Text = "Tamanho";
-            this.Tamanho.Width = 100;
+            this.Tamanho.Width = 130;
             // 
             // Status
             // 
@@ -661,14 +666,16 @@
             // 
             // progressLimpeza
             // 
-            this.progressLimpeza.Location = new System.Drawing.Point(185, 637);
+            this.progressLimpeza.Location = new System.Drawing.Point(185, 629);
+            this.progressLimpeza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.progressLimpeza.Name = "progressLimpeza";
-            this.progressLimpeza.Size = new System.Drawing.Size(650, 25);
+            this.progressLimpeza.Size = new System.Drawing.Size(651, 43);
             this.progressLimpeza.TabIndex = 2;
             // 
             // btnAnalisarLimpeza
             // 
-            this.btnAnalisarLimpeza.Location = new System.Drawing.Point(185, 677);
+            this.btnAnalisarLimpeza.Location = new System.Drawing.Point(105, 692);
+            this.btnAnalisarLimpeza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAnalisarLimpeza.Name = "btnAnalisarLimpeza";
             this.btnAnalisarLimpeza.Size = new System.Drawing.Size(100, 33);
             this.btnAnalisarLimpeza.TabIndex = 1;
@@ -680,7 +687,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(114, 19);
+            this.label14.Location = new System.Drawing.Point(115, 18);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(0, 20);
             this.label14.TabIndex = 0;
@@ -721,7 +728,7 @@
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

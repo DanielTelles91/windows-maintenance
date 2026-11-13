@@ -6,6 +6,11 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+/**
+ *
+ * @author Daniel Arantes Telles
+ */
+
 namespace Manutenção_Windows.Services
 {
     public class SystemCleanupAnalysisService
@@ -18,6 +23,16 @@ namespace Manutenção_Windows.Services
             public int FilesSkipped { get; set; }
         }
 
+        public class FolderCleanupResult
+        {
+            public string FolderPath { get; set; }
+            public int FilesDeleted { get; set; }
+            public int FilesSkipped { get; set; }
+            public int DirectoriesDeleted { get; set; }
+            public int DirectoriesSkipped { get; set; }
+            public long BytesDeleted { get; set; }
+        }
+
         public class ComponentStoreResult
         {
             public int ExitCode { get; set; }
@@ -28,12 +43,128 @@ namespace Manutenção_Windows.Services
             public long? CacheSizeBytes { get; set; }
             public int? ReclaimablePackages { get; set; }
             public bool? CleanupRecommended { get; set; }
+            public DateTime? LastCleanupDate { get; set; }
         }
 
         public static Task<FolderResult> AnalyzeFolderAsync(string folderPath)
         {
             return Task.Run(() => AnalyzeFolder(folderPath));
         }
+
+        public static Task<FolderCleanupResult> CleanFolderAsync(string folderPath)
+        {
+            return Task.Run(() => CleanFolder(folderPath));
+        }
+
+        private static FolderCleanupResult CleanFolder(string folderPath)
+        {
+            var result = new FolderCleanupResult
+            {
+                FolderPath = folderPath
+            };
+
+            if (!Directory.Exists(folderPath))
+                throw new DirectoryNotFoundException(
+                    $"A pasta não foi encontrada: {folderPath}");
+
+            // Não permite trabalhar sobre uma pasta raiz que seja um link.
+            FileAttributes rootAttributes = File.GetAttributes(folderPath);
+
+            if ((rootAttributes & FileAttributes.ReparsePoint) != 0)
+                throw new InvalidOperationException(
+                    "A pasta selecionada é um link ou ponto de montagem.");
+
+            var pendingFolders = new Stack<string>();
+            var directories = new List<string>();
+
+            pendingFolders.Push(folderPath);
+
+            while (pendingFolders.Count > 0)
+            {
+                string currentFolder = pendingFolders.Pop();
+                directories.Add(currentFolder);
+
+                try
+                {
+                    foreach (string entry in Directory.EnumerateFileSystemEntries(currentFolder))
+                    {
+                        try
+                        {
+                            FileAttributes attributes = File.GetAttributes(entry);
+
+                            // Ignora links simbólicos e pontos de montagem.
+                            if ((attributes & FileAttributes.ReparsePoint) != 0)
+                                continue;
+
+                            if ((attributes & FileAttributes.Directory) != 0)
+                            {
+                                pendingFolders.Push(entry);
+                            }
+                            else
+                            {
+                                var fileInfo = new FileInfo(entry);
+                                long fileSize = fileInfo.Length;
+
+                                File.Delete(entry);
+
+                                result.FilesDeleted++;
+                                result.BytesDeleted += fileSize;
+                            }
+                        }
+                        catch (UnauthorizedAccessException)
+                        {
+                            result.FilesSkipped++;
+                        }
+                        catch (IOException)
+                        {
+                            result.FilesSkipped++;
+                        }
+                        catch (System.Security.SecurityException)
+                        {
+                            result.FilesSkipped++;
+                        }
+                    }
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    result.DirectoriesSkipped++;
+                }
+                catch (IOException)
+                {
+                    result.DirectoriesSkipped++;
+                }
+                catch (System.Security.SecurityException)
+                {
+                    result.DirectoriesSkipped++;
+                }
+            }
+
+            // Remove as subpastas de dentro para fora.
+            // (A pasta TEMP original é preservada)
+            for (int i = directories.Count - 1; i >= 1; i--)
+            {
+                try
+                {
+                    Directory.Delete(directories[i], false);
+                    result.DirectoriesDeleted++;
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    result.DirectoriesSkipped++;
+                }
+                catch (IOException)
+                {
+                    result.DirectoriesSkipped++;
+                }
+                catch (System.Security.SecurityException)
+                {
+                    result.DirectoriesSkipped++;
+                }
+            }
+
+            return result;
+        }
+
 
         private static FolderResult AnalyzeFolder(string folderPath)
         {
@@ -146,6 +277,47 @@ namespace Manutenção_Windows.Services
             }
         }
 
+        public static async Task<ComponentStoreResult> CleanComponentStoreAsync()
+        {
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = "dism.exe",
+                Arguments = "/English /Online /Cleanup-Image /StartComponentCleanup",
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            };
+
+            using (var process = new Process())
+            {
+                process.StartInfo = startInfo;
+                process.Start();
+
+                Task<string> outputTask =
+                    process.StandardOutput.ReadToEndAsync();
+
+                Task<string> errorTask =
+                    process.StandardError.ReadToEndAsync();
+
+                await Task.WhenAll(outputTask, errorTask);
+
+                await Task.Run(() => process.WaitForExit());
+
+                string output = outputTask.Result;
+                string error = errorTask.Result;
+
+                if (!string.IsNullOrWhiteSpace(error))
+                    output += Environment.NewLine + error;
+
+                return new ComponentStoreResult
+                {
+                    ExitCode = process.ExitCode,
+                    Output = output
+                };
+            }
+        }
+
 
 
         private static ComponentStoreResult ParseComponentStoreOutput(
@@ -178,7 +350,11 @@ namespace Manutenção_Windows.Services
 
                 CleanupRecommended = FindBoolean(output,
                     "Limpeza do Repositório de Componentes Recomendada",
-                    "Component Store Cleanup Recommended")
+                    "Component Store Cleanup Recommended"),
+
+                LastCleanupDate = FindDateTime(output,
+    "Date of Last Cleanup",
+    "Data da Última Limpeza")
             };
         }
 
@@ -292,6 +468,43 @@ namespace Manutenção_Windows.Services
                             valor.StartsWith("No",
                             StringComparison.OrdinalIgnoreCase))
                             return false;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private static DateTime? FindDateTime(string output, params string[] labels)
+        {
+            foreach (string line in output.Split(
+                new[] { '\r', '\n' },
+                StringSplitOptions.RemoveEmptyEntries))
+            {
+                foreach (string label in labels)
+                {
+                    int index = line.IndexOf(
+                        label,
+                        StringComparison.OrdinalIgnoreCase);
+
+                    if (index >= 0)
+                    {
+                        int colonIndex = line.IndexOf(':', index + label.Length);
+
+                        if (colonIndex >= 0)
+                        {
+                            string dateText = line.Substring(colonIndex + 1).Trim();
+
+                            if (DateTime.TryParseExact(
+                                dateText,
+                                "yyyy-MM-dd HH:mm:ss",
+                                CultureInfo.InvariantCulture,
+                                DateTimeStyles.None,
+                                out DateTime date))
+                            {
+                                return date;
+                            }
+                        }
                     }
                 }
             }

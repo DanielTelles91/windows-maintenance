@@ -1,5 +1,10 @@
 ﻿using System;
 
+/**
+ *
+ * @author Daniel Arantes Telles
+ */
+
 namespace Manutenção_Windows.Models
 {
     public enum TipoBoot
